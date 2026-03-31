@@ -13,7 +13,7 @@
 
 	<title>Admin Panel || Giriş Yap</title>
 
-    @vite(["resources/css/temacss/app.css"])
+    @vite(["resources/css/app.css"])
 
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -26,7 +26,7 @@
 	</main>
 
 
-	@vite(["resources/js/temajs/app.js"])
+	@vite(["resources/js/app.js"])
 
 </body>
 </html>

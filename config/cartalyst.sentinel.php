@@ -213,7 +213,7 @@ return [
         'model' => 'Cartalyst\Sentinel\Throttling\EloquentThrottle',
 
         'global' => [
-            'interval' => 900,
+            'interval' => 1,
 
             'thresholds' => [
                 10 => 1,
@@ -226,13 +226,13 @@ return [
         ],
 
         'ip' => [
-            'interval' => 900,
+            'interval' => 1,
 
             'thresholds' => 5,
         ],
 
         'user' => [
-            'interval' => 900,
+            'interval' => 1,
 
             'thresholds' => 5,
         ],

@@ -16,7 +16,19 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="m-sm-3">
-                                <form>
+                                <form action="{{route('login.post')}}" method="POST">
+
+                                        @if ($errors->any())
+                                            <div class="alert alert-danger text-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
+
+                                    @csrf
                                     <div class="mb-3">
                                         <label class="form-label">Kullanıcı Adı</label>
                                         <input class="form-control form-control-lg email" type="text" name="username"
@@ -36,7 +48,7 @@
                                         </div>
                                     </div>
                                     <div class="d-grid gap-2 mt-3">
-                                        <button type="button" class="btn btn-lg btn-primary loginBtn">Giriş Yap</button>
+                                        <button type="submit" class="btn btn-lg btn-primary loginBtn">Giriş Yap</button>
                                     </div>
                                 </form>
                             </div>
