@@ -38,11 +38,7 @@
                     <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Kurumsal Yapı</span>
                 </a>
             </li>
-            <li class="sidebar-item ">
-                <a class="sidebar-link" href="{{ route('contact') }}">
-                    <i class="align-middle" data-feather="user-check"></i> <span class="align-middle">Rehber Yönetimi</span>
-                </a>
-            </li>
+
             <li class="sidebar-item ">
                 <a class="sidebar-link" href="{{ route('suggestion') }}">
                     <i class="align-middle" data-feather="book-open"></i> <span class="align-middle">Talep & Öneri Formu</span>
@@ -68,16 +64,7 @@
                     <i class="align-middle" data-feather="camera"></i> <span class="align-middle">Foto Galeri</span>
                 </a>
             </li>
-            <li class="sidebar-item ">
-                <a class="sidebar-link" href="{{ route('video') }}">
-                    <i class="align-middle" data-feather="video"></i> <span class="align-middle">Video Galeri</span>
-                </a>
-            </li>
-            <li class="sidebar-item ">
-                <a class="sidebar-link" href="{{ route('language') }}">
-                    <i class="align-middle" data-feather="globe"></i> <span class="align-middle">Dil Yönetimi</span>
-                </a>
-            </li>
+
             <li class="sidebar-item ">
                 <a class="sidebar-link" href="{{ route('message') }}">
                     <i class="align-middle" data-feather="mail"></i> <span class="align-middle">Mesajlar</span>
@@ -97,18 +84,13 @@
                 </a>
             </li>
             <li class="sidebar-item ">
-                <a class="sidebar-link" href="{{ route('menu') }}">
+                <a class="sidebar-link" href="{{ route('mainmenu') }}">
                     <i class="align-middle" data-feather="menu"></i> <span class="align-middle">Menu Ayarları</span>
                 </a>
             </li>
             <li class="sidebar-item ">
                 <a class="sidebar-link" href="{{ route('footermenu') }}">
                     <i class="align-middle" data-feather="arrow-down"></i> <span class="align-middle">Footer Menu Ayarları</span>
-                </a>
-            </li>
-            <li class="sidebar-item ">
-                <a class="sidebar-link" href="{{ route('middlelink') }}">
-                    <i class="align-middle" data-feather="align-center"></i> <span class="align-middle">Orta Link Ayarları</span>
                 </a>
             </li>
             <li class="sidebar-item ">
@@ -127,18 +109,8 @@
                 </a>
             </li>
             <li class="sidebar-item ">
-                <a class="sidebar-link" href="{{ route('sms') }}">
-                    <i class="align-middle" data-feather="send"></i> <span class="align-middle">Sms Ayarları</span>
-                </a>
-            </li>
-            <li class="sidebar-item ">
                 <a class="sidebar-link" href="{{ route('module') }}">
                     <i class="align-middle" data-feather="layout"></i> <span class="align-middle">Anasayfa Modul Ayarları</span>
-                </a>
-            </li>
-            <li class="sidebar-item ">
-                <a class="sidebar-link" href="{{ route('mail') }}">
-                    <i class="align-middle" data-feather="inbox"></i> <span class="align-middle">Mail Ayarları</span>
                 </a>
             </li>
             <li class="sidebar-item ">

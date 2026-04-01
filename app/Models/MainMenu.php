@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class MainMenu extends Model
+{
+    use SoftDeletes;
+
+    public $primaryKey = 'id';
+
+    public $table = 'main_menu';
+
+    public $fillable = [
+        'name',
+        'parent_id',
+        'url',
+        'language_code',
+        'order',
+        'is_active',
+        'open_type',
+    ];
+}

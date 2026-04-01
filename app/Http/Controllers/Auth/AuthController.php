@@ -27,4 +27,10 @@ class AuthController extends Controller
             return redirect()->route('login')->withErrors(['message' => 'Giriş başarısız. Lütfen bilgilerinizi kontrol edin.']);
         }
     }
+
+    public function logout()
+    {
+        Sentinel::logout();
+        return redirect()->route('login');
+    }
 }

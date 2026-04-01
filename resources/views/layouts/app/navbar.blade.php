@@ -25,7 +25,8 @@
                         Ayarlar</a>
 
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="">Çıkış Yap</a>
+
+                    <a class="dropdown-item" href="{{ route('logout') }}">Çıkış Yap</a>
                 </div>
             </li>
         </ul>

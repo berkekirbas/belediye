@@ -29,6 +29,7 @@
                                         @endif
 
                                     @csrf
+
                                     <div class="mb-3">
                                         <label class="form-label">Kullanıcı Adı</label>
                                         <input class="form-control form-control-lg email" type="text" name="username"
