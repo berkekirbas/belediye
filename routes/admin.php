@@ -25,6 +25,11 @@ Route::prefix('/panel')->middleware('admin.auth')->group(function () {
     // Ana Modüllerin yönlendirmeleri
     Route::prefix('/menu-yonetimi/mainmenu')->group(function () {
         Route::get('/', [MainMenuController::class, 'index'])->name('mainmenu');
+        Route::get('/add', [MainMenuController::class, 'add'])->name('mainmenu.add');
+        Route::post('/add', [MainMenuController::class, 'store'])->name('mainmenu.store');
+        Route::get('/edit/{id}', [MainMenuController::class, 'edit'])->name('mainmenu.edit');
+        Route::post('/edit/{id}', [MainMenuController::class, 'update'])->name('mainmenu.update');
+        Route::delete('/destroy/{id}', [MainMenuController::class, 'destroy'])->name('mainmenu.destroy');
     });
 
 
