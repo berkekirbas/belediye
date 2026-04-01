@@ -18,6 +18,17 @@
                 @csrf
 
                 <div class="form-group mb-3">
+                    <label class="form-label">Ana Menü</label>
+                    <select name="parent_id" id="parent_id" class="form-control" value="{{ old('parent_id') }}">
+                        <option value="-1">Ana Menü</option>
+                        @foreach ($mainMenus as $mainMenu)
+                            <option value="{{ $mainMenu->id }}">{{ $mainMenu->name }}</option>
+                        @endforeach
+                    </select>
+                    <span class="text-danger">{{ $errors->first('parent_id') }}</span>
+                </div>
+
+                <div class="form-group mb-3">
                     <label class="form-label">Menü Adı</label>
                     <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                     <span class="text-danger">{{ $errors->first('name') }}</span>

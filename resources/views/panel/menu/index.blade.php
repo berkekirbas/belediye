@@ -11,6 +11,7 @@
                 <th>Menü Adı</th>
                 <th>Menü Url</th>
                 <th>Sıra</th>
+
                 <th>İşlemler</th>
             </tr>
         </thead>

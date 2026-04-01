@@ -17,6 +17,7 @@ class MainMenuController extends Controller
             $menus = MainMenu::query();
 
             return datatables()->eloquent($menus)
+
                 ->addColumn('actions', function ($menu) {
                     $editUrl = route('mainmenu.edit', $menu->id);
                     $deleteUrl = route('mainmenu.destroy', $menu->id);
@@ -28,7 +29,7 @@ class MainMenuController extends Controller
                     ' . method_field('DELETE') . '
                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Bu menüyü silmek istediğinize emin misiniz?\')">Sil</button>
                 </form>';
-                })->rawColumns(['actions'])->make(true);
+                })->rawColumns(['actions', 'sub_menus'])->make(true);
         }
 
         return view('panel.menu.index');
@@ -36,7 +37,8 @@ class MainMenuController extends Controller
 
     public function add()
     {
-        return view('panel.menu.add');
+        $mainMenus = MainMenu::whereNull('parent_id')->get();
+        return view('panel.menu.add', compact('mainMenus'));
     }
 
     public function store(MenuCreateRequest $request)
@@ -46,6 +48,7 @@ class MainMenuController extends Controller
                 'name' => $request->name,
                 'url' => $request->url,
                 'order' => (int)$request->order,
+                'parent_id' => (int) $request->parent_id == -1 ? null : (int) $request->parent_id,
                 'open_type' => $request->open_type,
                 'is_active' => $request->has('is_active') ? 1 : 0
             ]);
