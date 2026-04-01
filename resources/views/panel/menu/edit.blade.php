@@ -17,6 +17,19 @@
             <form class="card-body" action="{{ route('mainmenu.update', $menu->id) }}" method="POST">
                 @csrf
 
+                <div class="form-group mb-3">
+                    <label class="form-label">Ana Menü</label>
+                    <select name="parent_id" id="parent_id" class="form-control"
+                        value="{{ old('parent_id', $menu->parent_id) }}">
+                        <option value="-1" {{ old('parent_id', $menu->parent_id) == -1 ? 'selected' : '' }}>Ana Menü
+                        </option>
+                        @foreach ($mainMenus as $mainMenu)
+                            <option value="{{ $mainMenu->id }}"
+                                {{ old('parent_id', $menu->parent_id) == $mainMenu->id ? 'selected' : '' }}>
+                                {{ $mainMenu->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
 
                 <div class="form-group mb-3">
                     <label class="form-label">Menü Adı</label>

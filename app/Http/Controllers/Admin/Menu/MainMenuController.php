@@ -62,7 +62,8 @@ class MainMenuController extends Controller
     public function edit($id)
     {
         $menu = MainMenu::findOrFail($id);
-        return view('panel.menu.edit', compact('menu'));
+        $mainMenus = MainMenu::whereNull('parent_id')->where('id', '!=', $id)->get();
+        return view('panel.menu.edit', compact('menu', 'mainMenus'));
     }
 
     public function update(MenuCreateRequest $request, $id)
