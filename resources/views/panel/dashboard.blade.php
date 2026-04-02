@@ -45,15 +45,6 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row text-center">
-                            <button class="btn btn-primary btn-lg">Yeni Personel Ekle</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row text-center">
                             <button class="btn btn-primary btn-lg">Yeni Proje Ekle</button>
                         </div>
                     </div>
@@ -81,15 +72,6 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row text-center">
-                            <button class="btn btn-primary btn-lg">Yeni Video Ekle</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row text-center">
                             <button class="btn btn-primary btn-lg">Yönetici Ayarları</button>
                         </div>
                     </div>
@@ -109,15 +91,6 @@
                     <div class="card-body">
                         <div class="row text-center">
                             <button class="btn btn-primary btn-lg">Footer Menu Ayarları</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row text-center">
-                            <button class="btn btn-primary btn-lg">Mail Ayarları</button>
                         </div>
                     </div>
                 </div>

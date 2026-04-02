@@ -13,7 +13,7 @@
 
                 <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
                     <img src="/img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="" /> <span
-                        class="text-dark">Ad & Soyad</span>
+                        class="text-dark">{{ Sentinel::getUser()->first_name }} {{ Sentinel::getUser()->last_name }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
                     <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1"
