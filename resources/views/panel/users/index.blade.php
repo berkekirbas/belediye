@@ -7,12 +7,13 @@
         <a href="{{ route('users.add') }}" class="btn btn-primary">Yeni Yönetici Ekle</a>
     </div>
 
-    <table class="table">
+    <table id="usersTable" class="table-responsive table">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Başlık</th>
-                <th>Oluşturulma Tarihi</th>
+                <th>Adı</th>
+                <th>Soyadı</th>
+                <th>E-Mail</th>
+                <th>Yetki Grubu</th>
                 <th>İşlemler</th>
             </tr>
         </thead>
@@ -22,4 +23,41 @@
     </table>
 
 
+@endsection
+
+@section('js')
+    {{-- yajra ile datatable --}}
+
+    <script>
+        $(document).ready(function() {
+            $('#usersTable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{ route('users') }}',
+                columns: [{
+                        data: 'first_name',
+                        name: 'first_name'
+                    },
+                    {
+                        data: 'last_name',
+                        name: 'last_name'
+                    },
+                    {
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
+                        data: 'permissions',
+                        name: 'permissions'
+                    },
+                    {
+                        data: 'actions',
+                        name: 'actions',
+                        orderable: false,
+                        searchable: false
+                    }
+                ]
+            })
+        });
+    </script>
 @endsection

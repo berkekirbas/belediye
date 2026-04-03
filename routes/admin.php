@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\Menu\MainMenuController;
 use App\Http\Controllers\Admin\Condolence\CondolenceController;
 use App\Http\Controllers\Admin\Theme\ThemeController;
 use App\Http\Controllers\Admin\Limit\LimitController;
+use App\Http\Controllers\Admin\Users\UsersController;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Support\Facades\Route;
@@ -58,6 +59,15 @@ Route::prefix('/limit')->group(function () {
     Route::post('/update', [LimitController::class, 'update'])->name('limit.update');
 });
 
+// Kullanıcı Modüllerin yönlendirmeleri
+Route::prefix('/users')->group(function () {
+     Route::get('/', [UsersController::class, 'index'])->name('users');
+     Route::get('/add', [UsersController::class, 'add'])->name('users.add');
+     Route::post('/add', [UsersController::class, 'store'])->name('users.store');
+     Route::get('/edit/{id}', [UsersController::class, 'edit'])->name('users.edit');
+     Route::post('/edit/{id}', [UsersController::class, 'update'])->name('users.update');
+     Route::delete('/destroy/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
+});
 
 
     Route::get('/pages', function () {
@@ -122,9 +132,6 @@ Route::prefix('/limit')->group(function () {
     Route::get('/mail', function () {
         return view('panel.mail.index');
     })->name('mail');
-    Route::get('/users', function () {
-        return view('panel.users.index');
-    })->name('users');
 
     // Ekleme Modüllerin yönlendirmeleri
 
