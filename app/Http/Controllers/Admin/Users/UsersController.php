@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UsersCreateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Cartalyst\Sentinel\Laravel\Facades\Activation;
 
 
 class UsersController extends Controller
@@ -45,13 +46,20 @@ class UsersController extends Controller
     public function store(UsersCreateRequest $request)
     {
         try {
-            User::create([
+            $user =User::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
                 'permissions' => $request->permissions
             ]);
+
+             // 2. Aktivasyon oluştur
+            $activation = Activation::create($user);
+
+            // 3. Aktivasyonu tamamla (aktif hale getir)
+            Activation::complete($user, $activation->code);
+
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->withErrors(['error' => 'Kullanıcı oluşturulurken bir hata oluştu: ' . $e->getMessage()]);
         }
