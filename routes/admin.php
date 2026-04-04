@@ -4,6 +4,7 @@
 use App\Http\Controllers\Auth\AuthController;
 
 use App\Http\Controllers\Admin\Menu\MainMenuController;
+use App\Http\Controllers\Admin\Page\PageController;
 use App\Http\Controllers\Admin\Condolence\CondolenceController;
 use App\Http\Controllers\Admin\Theme\ThemeController;
 use App\Http\Controllers\Admin\Limit\LimitController;
@@ -19,60 +20,87 @@ Route::prefix('/panel')->middleware('redirect.dashboard')->group(function () {
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 });
 
-// giriş yapmış kullanıcılar
-Route::prefix('/panel')->middleware('admin.auth')->group(function () {
+
+// giriş yapmış kullanıcılar -> admin
+Route::prefix('/panel')->middleware(['auth', 'checkRole'])->group(function () {
+
+    Route::get('/settings', function () {
+        return view('panel.settings.index');
+    })->name('settings');
+
+    // Ana Menü Modüllerin yönlendirmeleri
+    Route::prefix('/menu-yonetimi/mainmenu')->group(function () {
+        Route::get('/', [MainMenuController::class, 'index'])->name('mainmenu');
+        Route::get('/add', [MainMenuController::class, 'add'])->name('mainmenu.add');
+        Route::post('/add', [MainMenuController::class, 'store'])->name('mainmenu.store');
+        Route::get('/edit/{id}', [MainMenuController::class, 'edit'])->name('mainmenu.edit');
+        Route::post('/edit/{id}', [MainMenuController::class, 'update'])->name('mainmenu.update');
+        Route::delete('/destroy/{id}', [MainMenuController::class, 'destroy'])->name('mainmenu.destroy');
+    });
+
+    Route::get('/footermenu', function () {
+        return view('panel.footermenu.index');
+    })->name('footermenu');
+    Route::get('/quickmenu', function () {
+        return view('panel.quickmenu.index');
+    })->name('quickmenu');
+
+    // Limit Modülünün yönlendirmeleri
+    Route::prefix('/limit')->group(function () {
+        Route::get('/', [LimitController::class, 'index'])->name('limit');
+        Route::post('/update', [LimitController::class, 'update'])->name('limit.update');
+    });
+
+    // Tema Modülünün yönlendirmeleri
+    Route::prefix('/theme')->group(function () {
+        Route::get('/', [ThemeController::class, 'index'])->name('theme');
+        Route::post('/update', [ThemeController::class, 'update'])->name('theme.update');
+    });
+
+
+    Route::get('/module', function () {
+        return view('panel.module.index');
+    })->name('module');
+
+    // Kullanıcı Modüllerin yönlendirmeleri
+    Route::prefix('/users')->group(function () {
+        Route::get('/', [UsersController::class, 'index'])->name('users');
+        Route::get('/add', [UsersController::class, 'add'])->name('users.add');
+        Route::post('/add', [UsersController::class, 'store'])->name('users.store');
+        Route::get('/edit/{id}', [UsersController::class, 'edit'])->name('users.edit');
+        Route::post('/edit/{id}', [UsersController::class, 'update'])->name('users.update');
+        Route::delete('/destroy/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
+    });
+});
+
+// giriş yapmış kullanıcılar -> admin ve editör
+Route::prefix('/panel')->middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('panel.dashboard');
     })->name('dashboard');
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Ana Menü Modüllerin yönlendirmeleri
-Route::prefix('/menu-yonetimi/mainmenu')->group(function () {
-    Route::get('/', [MainMenuController::class, 'index'])->name('mainmenu');
-    Route::get('/add', [MainMenuController::class, 'add'])->name('mainmenu.add');
-    Route::post('/add', [MainMenuController::class, 'store'])->name('mainmenu.store');
-    Route::get('/edit/{id}', [MainMenuController::class, 'edit'])->name('mainmenu.edit');
-    Route::post('/edit/{id}', [MainMenuController::class, 'update'])->name('mainmenu.update');
-    Route::delete('/destroy/{id}', [MainMenuController::class, 'destroy'])->name('mainmenu.destroy');
-});
 
-// Taziye & Başsağlığı Modüllerin yönlendirmeleri
-Route::prefix('/condolence')->group(function () {
-    Route::get('/', [CondolenceController::class, 'index'])->name('condolence');
-    Route::get('/add', [CondolenceController::class, 'add'])->name('condolence.add');
-    Route::post('/add', [CondolenceController::class, 'store'])->name('condolence.store');
-    Route::get('/edit/{id}', [CondolenceController::class, 'edit'])->name('condolence.edit');
-    Route::post('/edit/{id}', [CondolenceController::class, 'update'])->name('condolence.update');
-    Route::delete('/destroy/{id}', [CondolenceController::class, 'destroy'])->name('condolence.destroy');
-});
+    // Taziye & Başsağlığı Modüllerin yönlendirmeleri
+    Route::prefix('/condolence')->group(function () {
+        Route::get('/', [CondolenceController::class, 'index'])->name('condolence');
+        Route::get('/add', [CondolenceController::class, 'add'])->name('condolence.add');
+        Route::post('/add', [CondolenceController::class, 'store'])->name('condolence.store');
+        Route::get('/edit/{id}', [CondolenceController::class, 'edit'])->name('condolence.edit');
+        Route::post('/edit/{id}', [CondolenceController::class, 'update'])->name('condolence.update');
+        Route::delete('/destroy/{id}', [CondolenceController::class, 'destroy'])->name('condolence.destroy');
+    });
 
-// Tema Modülünün yönlendirmeleri
-Route::prefix('/theme')->group(function () {
-    Route::get('/', [ThemeController::class, 'index'])->name('theme');
-    Route::post('/update', [ThemeController::class, 'update'])->name('theme.update');
-});
-
-// Limit Modülünün yönlendirmeleri
-Route::prefix('/limit')->group(function () {
-    Route::get('/', [LimitController::class, 'index'])->name('limit');
-    Route::post('/update', [LimitController::class, 'update'])->name('limit.update');
-});
-
-// Kullanıcı Modüllerin yönlendirmeleri
-Route::prefix('/users')->group(function () {
-     Route::get('/', [UsersController::class, 'index'])->name('users');
-     Route::get('/add', [UsersController::class, 'add'])->name('users.add');
-     Route::post('/add', [UsersController::class, 'store'])->name('users.store');
-     Route::get('/edit/{id}', [UsersController::class, 'edit'])->name('users.edit');
-     Route::post('/edit/{id}', [UsersController::class, 'update'])->name('users.update');
-     Route::delete('/destroy/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
-});
-
-
-    Route::get('/pages', function () {
-        return view('panel.pages.index');
-    })->name('pages');
+    // Sayfa Yönetim Modülünün yönlendirmeleri
+    Route::prefix('/pages')->group(function () {
+        Route::get('/', [PageController::class, 'index'])->name('pages');
+        Route::get('/add', [PageController::class, 'add'])->name('pages.add');
+        Route::post('/add', [PageController::class, 'store'])->name('pages.store');
+        Route::get('/edit/{id}', [PageController::class, 'edit'])->name('pages.edit');
+        Route::post('/edit/{id}', [PageController::class, 'update'])->name('pages.update');
+        Route::delete('/destroy/{id}', [PageController::class, 'destroy'])->name('pages.destroy');
+    });
     Route::get('/services', function () {
         return view('panel.services.index');
     })->name('services');
@@ -109,36 +137,4 @@ Route::prefix('/users')->group(function () {
     Route::get('/newsletter', function () {
         return view('panel.newsletter.index');
     })->name('newsletter');
-    Route::get('/settings', function () {
-        return view('panel.settings.index');
-    })->name('settings');
-
-
-    Route::get('/footermenu', function () {
-        return view('panel.footermenu.index');
-    })->name('footermenu');
-    Route::get('/middlelink', function () {
-        return view('panel.middlelink.index');
-    })->name('middlelink');
-    Route::get('/quickmenu', function () {
-        return view('panel.quickmenu.index');
-    })->name('quickmenu');
-    Route::get('/sms', function () {
-        return view('panel.sms.index');
-    })->name('sms');
-    Route::get('/module', function () {
-        return view('panel.module.index');
-    })->name('module');
-    Route::get('/mail', function () {
-        return view('panel.mail.index');
-    })->name('mail');
-
-    // Ekleme Modüllerin yönlendirmeleri
-
-    Route::get('/pages/add', function () {
-        return view('panel.pages.add');
-    })->name('pages.add');
-    Route::get('/users/add', function () {
-        return view('panel.users.add');
-    })->name('users.add');
 });

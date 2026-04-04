@@ -7,15 +7,16 @@ use App\Http\Requests\Admin\UsersCreateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 
 
 class UsersController extends Controller
 {
     public function index(Request $request)
     {
-       if ($request->ajax()) {
+        if ($request->ajax()) {
 
-            $users = User::query();
+            $users = User::query()->with('roles');
 
             return datatables()->eloquent($users)
 
@@ -46,37 +47,31 @@ class UsersController extends Controller
     public function store(UsersCreateRequest $request)
     {
         try {
-            $user =User::create([
+            $user = Sentinel::registerAndActivate([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'email' => $request->email,
-                'password' => bcrypt($request->password),
-                'permissions' => $request->permissions
+                'password' => $request->password,
             ]);
 
-             // 2. Aktivasyon oluştur
-            $activation = Activation::create($user);
-
-            // 3. Aktivasyonu tamamla (aktif hale getir)
-            Activation::complete($user, $activation->code);
-
+            $role = Sentinel::findRoleBySlug($request->permissions == 1 ? 'admin' : 'editor');
+            $user->roles()->attach($role);
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->withErrors(['error' => 'Kullanıcı oluşturulurken bir hata oluştu: ' . $e->getMessage()]);
         }
 
         return redirect()->route('users')->with('success', 'Kullanıcı Başarıyla Eklendi');
-
     }
 
     public function edit($id)
     {
-        $users = User::findOrFail($id);
+        $users = Sentinel::findById($id);
         return view('panel.users.edit', compact('users'));
     }
 
     public function update(Request $request, $id)
     {
-        $users = User::findOrFail($id);
+        $users = Sentinel::findById($id); // sentinelin kendi içerisinde gelen fonksiyonları kullanmak için bu yol daha doğru.
 
         try {
             $users->update([
@@ -84,8 +79,13 @@ class UsersController extends Controller
                 'last_name' => $request->last_name,
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
-                'permissions' => $request->permissions
             ]);
+
+            // Kullanıcının mevcut rollerini kaldır
+            $users->roles()->detach();
+            // Yeni rolü ekle
+            $role = Sentinel::findRoleBySlug($request->permissions == 1 ? 'admin' : 'editor');
+            $users->roles()->attach($role);
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->withErrors(['error' => 'Kullanıcı güncellenirken bir hata oluştu: ' . $e->getMessage()]);
         }
@@ -95,10 +95,9 @@ class UsersController extends Controller
 
     public function destroy($id)
     {
-        $users = User::findOrFail($id);
+        $users = Sentinel::findById($id); // sentinelin kendi içerisinde gelen fonksiyonları kullanmak için bu yol daha doğru.
         $users->delete();
 
         return redirect()->route('users')->with('success', 'Kullanıcı Başarıyla Silindi');
     }
-
 }

@@ -12,15 +12,13 @@ class ThemeController extends Controller
 {
     public function index()
     {
-        $id=1;
-        $theme = Theme::findOrFail($id);
+        $theme = Theme::first();
         return view('panel.theme.index', compact('theme'));
     }
 
     public function update(ThemeUpdateRequest $request)
     {
-        $id=1;
-        $theme = Theme::findOrFail($id);
+        $theme = Theme::first();
 
         try {
             $theme->update([
@@ -34,5 +32,4 @@ class ThemeController extends Controller
 
         return redirect()->route('theme')->with('success', 'Tema renkleri Başarıyla Güncellendi');
     }
-
 }

@@ -22,7 +22,6 @@ class User extends EloquentUser
     public $fillable = [
         'first_name',
         'last_name',
-        'permissions',
         'email',
         'password'
     ];

@@ -18,15 +18,16 @@
                 @csrf
 
                 <div class="form-group mb-3">
-                    <label class="form-label">Ana Menü</label>
-                    <select name="parent_id" id="parent_id" class="form-control"
-                        value="{{ old('parent_id', $menu->parent_id) }}">
-                        <option value="-1" {{ old('parent_id', $menu->parent_id) == -1 ? 'selected' : '' }}>Ana Menü
-                        </option>
-                        @foreach ($mainMenus as $mainMenu)
-                            <option value="{{ $mainMenu->id }}"
-                                {{ old('parent_id', $menu->parent_id) == $mainMenu->id ? 'selected' : '' }}>
-                                {{ $mainMenu->name }}</option>
+                    <label class="form-label">Üst Menü</label>
+                    <select name="parent_id" id="parent_id" class="form-control">
+                        <option value="-1"
+                            {{ is_null(old('parent_id', $menu->parent_id)) || old('parent_id', $menu->parent_id) == -1 ? 'selected' : '' }}>
+                            Üst Menü Yok (Ana Menü)</option>
+                        @foreach ($menuTree as $item)
+                            <option value="{{ $item['id'] }}"
+                                {{ old('parent_id', $menu->parent_id) == $item['id'] ? 'selected' : '' }}>
+                                {{ str_repeat('—', $item['level']) }}{{ $item['level'] > 0 ? ' ' : '' }}{{ $item['name'] }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -38,8 +39,25 @@
                 </div>
 
                 <div class="form-group mb-3">
+                    <label class="form-label">Sayfa Seçin</label>
+                    <select name="page_id" id="page_id" class="form-control">
+                        <option value="">Sayfa Seçilmedi (Manuel URL)</option>
+                        @foreach ($pages as $p)
+                            @php $pt = $p->translation('tr'); @endphp
+                            @if ($pt)
+                                <option value="{{ $p->id }}" data-slug="{{ $pt->slug }}"
+                                    {{ old('page_id', $menu->page_id) == $p->id ? 'selected' : '' }}>
+                                    {{ $pt->title }}
+                                </option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group mb-3">
                     <label class="form-label">Menü Url</label>
-                    <input type="text" class="form-control" name="url" value="{{ old('url', $menu->url) }}">
+                    <input type="text" class="form-control" name="url" id="url"
+                        value="{{ old('url', $menu->url) }}">
                     <span class="text-danger">{{ $errors->first('url') }}</span>
                 </div>
 
@@ -73,4 +91,16 @@
             </form>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script>
+        document.getElementById('page_id').addEventListener('change', function() {
+            const selected = this.options[this.selectedIndex];
+            const slug = selected.getAttribute('data-slug');
+            if (slug) {
+                document.getElementById('url').value = '/' + slug;
+            }
+        });
+    </script>
 @endsection

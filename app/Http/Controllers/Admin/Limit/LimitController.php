@@ -12,15 +12,13 @@ class LimitController extends Controller
 {
     public function index()
     {
-        $id=1;
-        $limit = Limit::findOrFail($id);
+        $limit = Limit::first();
         return view('panel.limit.index', compact('limit'));
     }
 
     public function update(LimitUpdateRequest $request)
     {
-        $id=1;
-        $limit = Limit::findOrFail($id);
+        $limit = Limit::first();
 
         try {
             $limit->update([
@@ -35,5 +33,4 @@ class LimitController extends Controller
 
         return redirect()->route('limit')->with('success', 'Limitler Başarıyla Güncellendi');
     }
-
 }

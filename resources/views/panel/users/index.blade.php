@@ -1,8 +1,6 @@
 @extends('layouts.app.app')
 
 @section('content')
-
-
     <div class="col-12 mb-4">
         <a href="{{ route('users.add') }}" class="btn btn-primary">Yeni Yönetici Ekle</a>
     </div>
@@ -21,8 +19,6 @@
             <!-- Sayfa verileri buraya eklenecek -->
         </tbody>
     </table>
-
-
 @endsection
 
 @section('js')
@@ -47,8 +43,15 @@
                         name: 'email'
                     },
                     {
-                        data: 'permissions',
-                        name: 'permissions'
+                        data: 'roles',
+                        name: 'roles',
+                        render: function(data, type, row) {
+                            if (data.length > 0) {
+                                return data.map(role => role.name).join(', ');
+                            } else {
+                                return 'Rol Atanmamış';
+                            }
+                        }
                     },
                     {
                         data: 'actions',

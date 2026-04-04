@@ -27,8 +27,9 @@
         $(document).ready(function() {
             $('#mainMenuTable').DataTable({
                 processing: true,
-                serverSide: true,
+                serverSide: false,
                 ajax: '{{ route('mainmenu') }}',
+                ordering: false,
                 columns: [{
                         data: 'name',
                         name: 'name'
