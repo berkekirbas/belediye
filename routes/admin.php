@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\Limit\LimitController;
 use App\Http\Controllers\Admin\Users\UsersController;
 use App\Http\Controllers\Admin\Activity\ActivityController;
 use App\Http\Controllers\Admin\Notice\NoticeController;
+use App\Http\Controllers\Admin\Settings\SettingsController;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Support\Facades\Route;
@@ -26,9 +27,11 @@ Route::prefix('/panel')->middleware('redirect.dashboard')->group(function () {
 // giriş yapmış kullanıcılar -> admin
 Route::prefix('/panel')->middleware(['auth', 'checkRole'])->group(function () {
 
-    Route::get('/settings', function () {
-        return view('panel.settings.index');
-    })->name('settings');
+
+    Route::prefix('/settings')->group(function () {
+        Route::get('/', [SettingsController::class, 'index'])->name('settings');
+        Route::post('/update', [SettingsController::class, 'update'])->name('settings.update');
+    });
 
     // Ana Menü Modüllerin yönlendirmeleri
     Route::prefix('/menu-yonetimi/mainmenu')->group(function () {
