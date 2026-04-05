@@ -17,15 +17,6 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row text-center">
-                            <button class="btn btn-primary btn-lg">Yeni Hizmet Ekle</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row text-center">
                             <button class="btn btn-primary btn-lg">Yeni Etkinlik Ekle</button>
                         </div>
                     </div>

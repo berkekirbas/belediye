@@ -20,11 +20,6 @@
                 </a>
             </li>
             <li class="sidebar-item">
-                <a class="sidebar-link" href="{{ route('services') }}">
-                    <i class="align-middle" data-feather="book"></i> <span class="align-middle">Hizmet Yönetimi</span>
-                </a>
-            </li>
-            <li class="sidebar-item">
                 <a class="sidebar-link" href="{{ route('activity') }}">
                     <i class="align-middle" data-feather="calendar"></i> <span class="align-middle">Etkinlik
                         Yönetimi</span>

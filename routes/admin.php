@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\Condolence\CondolenceController;
 use App\Http\Controllers\Admin\Theme\ThemeController;
 use App\Http\Controllers\Admin\Limit\LimitController;
 use App\Http\Controllers\Admin\Users\UsersController;
+use App\Http\Controllers\Admin\Activity\ActivityController;
+use App\Http\Controllers\Admin\Notice\NoticeController;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Support\Facades\Route;
@@ -101,15 +103,28 @@ Route::prefix('/panel')->middleware('auth')->group(function () {
         Route::post('/edit/{id}', [PageController::class, 'update'])->name('pages.update');
         Route::delete('/destroy/{id}', [PageController::class, 'destroy'])->name('pages.destroy');
     });
-    Route::get('/services', function () {
-        return view('panel.services.index');
-    })->name('services');
-    Route::get('/activity', function () {
-        return view('panel.activity.index');
-    })->name('activity');
-    Route::get('/notice', function () {
-        return view('panel.notice.index');
-    })->name('notice');
+
+    // Etkinlik Yönetim Modülünün yönlendirmeleri
+    Route::prefix('/activity')->group(function () {
+        Route::get('/', [ActivityController::class, 'index'])->name('activity');
+        Route::get('/add', [ActivityController::class, 'add'])->name('activity.add');
+        Route::post('/add', [ActivityController::class, 'store'])->name('activity.store');
+        Route::get('/edit/{id}', [ActivityController::class, 'edit'])->name('activity.edit');
+        Route::post('/edit/{id}', [ActivityController::class, 'update'])->name('activity.update');
+        Route::delete('/destroy/{id}', [ActivityController::class, 'destroy'])->name('activity.destroy');
+    });
+
+    // Duyuru Yönetim Modülünün yönlendirmeleri
+    Route::prefix('/notice')->group(function () {
+        Route::get('/', [NoticeController::class, 'index'])->name('notice');
+        Route::get('/add', [NoticeController::class, 'add'])->name('notice.add');
+        Route::post('/add', [NoticeController::class, 'store'])->name('notice.store');
+        Route::get('/edit/{id}', [NoticeController::class, 'edit'])->name('notice.edit');
+        Route::post('/edit/{id}', [NoticeController::class, 'update'])->name('notice.update');
+        Route::delete('/destroy/{id}', [NoticeController::class, 'destroy'])->name('notice.destroy');
+    });
+
+
     Route::get('/corporate', function () {
         return view('panel.corporate.index');
     })->name('corporate');
