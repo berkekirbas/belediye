@@ -5,18 +5,25 @@
         <a href="{{ route('notice.add') }}" class="btn btn-primary">Yeni Duyuru Ekle</a>
     </div>
 
-    <table id="noticeTable" class="table-responsive table">
-        <thead>
-            <tr>
-                <th>Sıra</th>
-                <th>Duyuru Adı</th>
-                <th>Duyuru Resmi</th>
-                <th>Durum</th>
-                <th>İşlemler</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Duyuru Listesi</h5>
+        </div>
+        <div class="card-body">
+            <table id="noticeTable" class="table-responsive table">
+                <thead>
+                    <tr>
+                        <th>Sıra</th>
+                        <th>Duyuru Adı</th>
+                        <th>Duyuru Resmi</th>
+                        <th>Durum</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
 @endsection
 
 @section('js')

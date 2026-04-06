@@ -21,6 +21,7 @@ class UsersController extends Controller
 
                 ->addColumn('actions', function ($user) {
                     $editUrl = route('users.edit', $user->id);
+
                     $deleteUrl = route('users.destroy', $user->id);
 
                     return '

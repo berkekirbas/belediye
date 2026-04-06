@@ -5,20 +5,25 @@
         <a href="{{ route('users.add') }}" class="btn btn-primary">Yeni Yönetici Ekle</a>
     </div>
 
-    <table id="usersTable" class="table-responsive table">
-        <thead>
-            <tr>
-                <th>Adı</th>
-                <th>Soyadı</th>
-                <th>E-Mail</th>
-                <th>Yetki Grubu</th>
-                <th>İşlemler</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Sayfa verileri buraya eklenecek -->
-        </tbody>
-    </table>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Yönetici Listesi</h5>
+        </div>
+        <div class="card-body">
+            <table id="usersTable" class="table-responsive table">
+                <thead>
+                    <tr>
+                        <th>Adı</th>
+                        <th>Soyadı</th>
+                        <th>E-Mail</th>
+                        <th>Yetki Grubu</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
 @endsection
 
 @section('js')

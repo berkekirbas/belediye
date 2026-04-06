@@ -5,19 +5,24 @@
         <a href="{{ route('quickmenu.add') }}" class="btn btn-primary">Yeni Hızlı Menü Ekle</a>
     </div>
 
-    <table id="quickMenuTable" class="table-responsive table">
-        <thead>
-            <tr>
-                <th>Sıra</th>
-                <th>Hızlı Menü Adı</th>
-                <th>Hızlı Menü Url</th>
-                <th>İşlemler</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Hızlı Menü verileri buraya eklenecek -->
-        </tbody>
-    </table>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Hızlı Menü Listesi</h5>
+        </div>
+        <div class="card-body">
+            <table id="quickMenuTable" class="table-responsive table">
+                <thead>
+                    <tr>
+                        <th>Sıra</th>
+                        <th>Hızlı Menü Adı</th>
+                        <th>Hızlı Menü Url</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
 @endsection
 
 @section('js')

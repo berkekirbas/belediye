@@ -5,19 +5,24 @@
         <a href="{{ route('footermenu.add') }}" class="btn btn-primary">Yeni Footer Menü Ekle</a>
     </div>
 
-    <table id="footerMenuTable" class="table-responsive table">
-        <thead>
-            <tr>
-                <th>Footer Menü Adı</th>
-                <th>Footer Menü Url</th>
-                <th>Sıra</th>
-                <th>İşlemler</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Footer menü verileri buraya eklenecek -->
-        </tbody>
-    </table>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Footer Menü Listesi</h5>
+        </div>
+        <div class="card-body">
+            <table id="footerMenuTable" class="table-responsive table">
+                <thead>
+                    <tr>
+                        <th>Footer Menü Adı</th>
+                        <th>Footer Menü Url</th>
+                        <th>Sıra</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
 @endsection
 
 @section('js')

@@ -13,13 +13,13 @@ class SettingsController extends Controller
 {
     public function index()
     {
-        $settings = Settings::first();
+        $settings = Settings::firstOrCreate([]);
         return view('panel.settings.index', compact('settings'));
     }
 
     public function update(SettingsUpdateRequest $request)
     {
-        $settings = Settings::first();
+        $settings = Settings::firstOrCreate([]);
 
         try {
 

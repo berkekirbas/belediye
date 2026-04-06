@@ -5,18 +5,25 @@
         <a href="{{ route('activity.add') }}" class="btn btn-primary">Yeni Etkinlik Ekle</a>
     </div>
 
-    <table id="activityTable" class="table-responsive table">
-        <thead>
-            <tr>
-                <th>Sıra</th>
-                <th>Etkinlik Adı</th>
-                <th>Etkinlik Resmi</th>
-                <th>Durum</th>
-                <th>İşlemler</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Etkinlik Listesi</h5>
+        </div>
+        <div class="card-body">
+            <table id="activityTable" class="table-responsive table">
+                <thead>
+                    <tr>
+                        <th>Sıra</th>
+                        <th>Etkinlik Adı</th>
+                        <th>Etkinlik Resmi</th>
+                        <th>Durum</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
 @endsection
 
 @section('js')

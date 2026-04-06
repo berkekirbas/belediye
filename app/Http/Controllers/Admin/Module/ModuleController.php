@@ -11,13 +11,13 @@ class ModuleController extends Controller
 {
     public function index()
     {
-        $module = Module::first();
+        $module = Module::firstOrCreate([]);
         return view('panel.module.index', compact('module'));
     }
 
     public function update(Request $request)
     {
-        $module = Module::first();
+        $module = Module::firstOrCreate([]);
 
         try {
             $module->update([

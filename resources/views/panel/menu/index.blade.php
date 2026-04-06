@@ -5,19 +5,24 @@
         <a href="{{ route('mainmenu.add') }}" class="btn btn-primary">Yeni Menü Ekle</a>
     </div>
 
-    <table id="mainMenuTable" class="table-responsive table">
-        <thead>
-            <tr>
-                <th>Menü Adı</th>
-                <th>Menü Url</th>
-                <th>Sıra</th>
-                <th>İşlemler</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Menü verileri buraya eklenecek -->
-        </tbody>
-    </table>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Ana Menü Listesi</h5>
+        </div>
+        <div class="card-body">
+            <table id="mainMenuTable" class="table-responsive table">
+                <thead>
+                    <tr>
+                        <th>Menü Adı</th>
+                        <th>Menü Url</th>
+                        <th>Sıra</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
 @endsection
 
 @section('js')

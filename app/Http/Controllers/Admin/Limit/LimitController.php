@@ -12,13 +12,13 @@ class LimitController extends Controller
 {
     public function index()
     {
-        $limit = Limit::first();
+        $limit = Limit::firstOrCreate();
         return view('panel.limit.index', compact('limit'));
     }
 
     public function update(LimitUpdateRequest $request)
     {
-        $limit = Limit::first();
+        $limit = Limit::firstOrCreate();
 
         try {
             $limit->update([

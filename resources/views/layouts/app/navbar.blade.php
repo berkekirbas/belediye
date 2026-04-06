@@ -13,15 +13,17 @@
 
                 <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
                     <img src="/img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="" /> <span
-                        class="text-dark">{{ Sentinel::getUser()->first_name }} {{ Sentinel::getUser()->last_name }}</span>
+                        class="text-dark">{{ Sentinel::getUser()->first_name }}
+                        {{ Sentinel::getUser()->last_name }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1"
-                            data-feather="user"></i> Profilim</a>
+                    <a class="dropdown-item" href="{{ route('users') }}"><i class="align-middle me-1"
+                            data-feather="user"></i> Kullanıcılar</a>
                     <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i>
                         Dashboard</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i>
+                    <a class="dropdown-item" href="{{ route('settings') }}"><i class="align-middle me-1"
+                            data-feather="settings"></i>
                         Ayarlar</a>
 
                     <div class="dropdown-divider"></div>

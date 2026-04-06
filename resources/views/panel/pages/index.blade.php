@@ -5,18 +5,25 @@
         <a href="{{ route('pages.add') }}" class="btn btn-primary">Yeni Sayfa Ekle</a>
     </div>
 
-    <table id="pagesTable" class="table-responsive table">
-        <thead>
-            <tr>
-                <th>Sıra</th>
-                <th>Sayfa Adı</th>
-                <th>Sayfa Resmi</th>
-                <th>Durum</th>
-                <th>İşlemler</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Sayfa Listesi</h5>
+        </div>
+        <div class="card-body">
+            <table id="pagesTable" class="table-responsive table">
+                <thead>
+                    <tr>
+                        <th>Sıra</th>
+                        <th>Sayfa Adı</th>
+                        <th>Sayfa Resmi</th>
+                        <th>Durum</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
 @endsection
 
 @section('js')

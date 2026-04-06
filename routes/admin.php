@@ -15,6 +15,12 @@ use App\Http\Controllers\Admin\Settings\SettingsController;
 use App\Http\Controllers\Admin\Module\ModuleController;
 use App\Http\Controllers\Admin\FooterMenu\FooterMenuController;
 use App\Http\Controllers\Admin\QuickMenu\QuickMenuController;
+use App\Http\Controllers\Admin\StaffGroup\StaffGroupController;
+use App\Http\Controllers\Admin\Staff\StaffController;
+use App\Http\Controllers\Admin\ProjectCategory\ProjectCategoryController;
+use App\Http\Controllers\Admin\Project\ProjectController;
+use App\Http\Controllers\Admin\News\NewsController;
+use App\Http\Controllers\Admin\PhotoGallery\PhotoGalleryController;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Support\Facades\Route;
@@ -146,24 +152,71 @@ Route::prefix('/panel')->middleware('auth')->group(function () {
     });
 
 
-    Route::get('/corporate', function () {
-        return view('panel.corporate.index');
-    })->name('corporate');
+    // Personel Grubu Yönetim Modülünün yönlendirmeleri
+    Route::prefix('/staff-group')->group(function () {
+        Route::get('/', [StaffGroupController::class, 'index'])->name('staff-group');
+        Route::get('/add', [StaffGroupController::class, 'add'])->name('staff-group.add');
+        Route::post('/add', [StaffGroupController::class, 'store'])->name('staff-group.store');
+        Route::get('/edit/{id}', [StaffGroupController::class, 'edit'])->name('staff-group.edit');
+        Route::post('/edit/{id}', [StaffGroupController::class, 'update'])->name('staff-group.update');
+        Route::delete('/destroy/{id}', [StaffGroupController::class, 'destroy'])->name('staff-group.destroy');
+    });
+
+    // Personel Yönetim Modülünün yönlendirmeleri
+    Route::prefix('/staff')->group(function () {
+        Route::get('/', [StaffController::class, 'index'])->name('staff');
+        Route::get('/add', [StaffController::class, 'add'])->name('staff.add');
+        Route::post('/add', [StaffController::class, 'store'])->name('staff.store');
+        Route::get('/edit/{id}', [StaffController::class, 'edit'])->name('staff.edit');
+        Route::post('/edit/{id}', [StaffController::class, 'update'])->name('staff.update');
+        Route::delete('/destroy/{id}', [StaffController::class, 'destroy'])->name('staff.destroy');
+    });
     Route::get('/contact', function () {
         return view('panel.contact.index');
     })->name('contact');
     Route::get('/suggestion', function () {
         return view('panel.suggestion.index');
     })->name('suggestion');
-    Route::get('/project', function () {
-        return view('panel.project.index');
-    })->name('project');
-    Route::get('/news', function () {
-        return view('panel.news.index');
-    })->name('news');
-    Route::get('/photo', function () {
-        return view('panel.photo.index');
-    })->name('photo');
+    // Proje Kategorisi Yönetim Modülünün yönlendirmeleri
+    Route::prefix('/project-category')->group(function () {
+        Route::get('/', [ProjectCategoryController::class, 'index'])->name('project-category');
+        Route::get('/add', [ProjectCategoryController::class, 'add'])->name('project-category.add');
+        Route::post('/add', [ProjectCategoryController::class, 'store'])->name('project-category.store');
+        Route::get('/edit/{id}', [ProjectCategoryController::class, 'edit'])->name('project-category.edit');
+        Route::post('/edit/{id}', [ProjectCategoryController::class, 'update'])->name('project-category.update');
+        Route::delete('/destroy/{id}', [ProjectCategoryController::class, 'destroy'])->name('project-category.destroy');
+    });
+
+    // Proje Yönetim Modülünün yönlendirmeleri
+    Route::prefix('/project')->group(function () {
+        Route::get('/', [ProjectController::class, 'index'])->name('project');
+        Route::get('/add', [ProjectController::class, 'add'])->name('project.add');
+        Route::post('/add', [ProjectController::class, 'store'])->name('project.store');
+        Route::get('/edit/{id}', [ProjectController::class, 'edit'])->name('project.edit');
+        Route::post('/edit/{id}', [ProjectController::class, 'update'])->name('project.update');
+        Route::delete('/destroy/{id}', [ProjectController::class, 'destroy'])->name('project.destroy');
+        Route::delete('/image/{id}', [ProjectController::class, 'destroyImage'])->name('project.image.destroy');
+    });
+    // Haber Yönetim Modülünün yönlendirmeleri
+    Route::prefix('/news')->group(function () {
+        Route::get('/', [NewsController::class, 'index'])->name('news');
+        Route::get('/add', [NewsController::class, 'add'])->name('news.add');
+        Route::post('/add', [NewsController::class, 'store'])->name('news.store');
+        Route::get('/edit/{id}', [NewsController::class, 'edit'])->name('news.edit');
+        Route::post('/edit/{id}', [NewsController::class, 'update'])->name('news.update');
+        Route::delete('/destroy/{id}', [NewsController::class, 'destroy'])->name('news.destroy');
+        Route::delete('/image/{id}', [NewsController::class, 'destroyImage'])->name('news.image.destroy');
+    });
+    // Foto Galeri Yönetim Modülünün yönlendirmeleri
+    Route::prefix('/photo')->group(function () {
+        Route::get('/', [PhotoGalleryController::class, 'index'])->name('photo');
+        Route::get('/add', [PhotoGalleryController::class, 'add'])->name('photo.add');
+        Route::post('/add', [PhotoGalleryController::class, 'store'])->name('photo.store');
+        Route::get('/edit/{id}', [PhotoGalleryController::class, 'edit'])->name('photo.edit');
+        Route::post('/edit/{id}', [PhotoGalleryController::class, 'update'])->name('photo.update');
+        Route::delete('/destroy/{id}', [PhotoGalleryController::class, 'destroy'])->name('photo.destroy');
+        Route::delete('/image/{id}', [PhotoGalleryController::class, 'destroyImage'])->name('photo.image.destroy');
+    });
     Route::get('/language', function () {
         return view('panel.language.index');
     })->name('language');
