@@ -17,7 +17,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row text-center">
-                            <button class="btn btn-primary btn-lg">Yeni Etkinlik Ekle</button>
+                            <a href="{{ route('activity.add') }}" class="btn btn-primary btn-lg">Yeni Etkinlik Ekle</a>
                         </div>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row text-center">
-                            <button class="btn btn-primary btn-lg">Yeni Duyuru Ekle</button>
+                            <a href="{{ route('notice.add') }}" class="btn btn-primary btn-lg">Yeni Duyuru Ekle</a>
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row text-center">
-                                <button class="btn btn-primary btn-lg">Yönetici Ayarları</button>
+                                <a href="{{ route('users') }}" class="btn btn-primary btn-lg">Yönetici Ayarları</a>
                             </div>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row text-center">
-                                <button class="btn btn-primary btn-lg">Menu Ayarları</button>
+                                <a href="{{ route('mainmenu') }}" class="btn btn-primary btn-lg">Menu Ayarları</a>
                             </div>
                         </div>
                     </div>
@@ -81,7 +81,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row text-center">
-                                <button class="btn btn-primary btn-lg">Footer Menu Ayarları</button>
+                                <a href="{{ route('footermenu') }}" class="btn btn-primary btn-lg">Footer Menu Ayarları</a>
                             </div>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row text-center">
-                                <button class="btn btn-primary btn-lg">Limit Ayarları</button>
+                                <a href="{{ route('limit') }}" class="btn btn-primary btn-lg">Limit Ayarları</a>
                             </div>
                         </div>
                     </div>
@@ -99,7 +99,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row text-center">
-                                <button class="btn btn-primary btn-lg">Anasayfa Modul Ayarları</button>
+                                <a href="{{ route('module') }}" class="btn btn-primary btn-lg">Anasayfa Modul Ayarları</a>
                             </div>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row text-center">
-                                <button class="btn btn-primary btn-lg">Tema Renk Ayarları</button>
+                                <a href="{{ route('theme') }}" class="btn btn-primary btn-lg">Tema Renk Ayarları</a>
                             </div>
                         </div>
                     </div>
@@ -117,7 +117,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row text-center">
-                                <button class="btn btn-primary btn-lg">Site Ayarları</button>
+                                <a href="{{ route('settings') }}" class="btn btn-primary btn-lg">Site Ayarları</a>
                             </div>
                         </div>
                     </div>
@@ -127,7 +127,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row text-center">
-                            <button class="btn btn-danger btn-lg">Çıkış Yap</button>
+                            <a href="{{ route('logout') }}" class="btn btn-danger btn-lg">Çıkış Yap</a>
                         </div>
                     </div>
                 </div>

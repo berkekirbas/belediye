@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\Notice\NoticeController;
 use App\Http\Controllers\Admin\Settings\SettingsController;
 use App\Http\Controllers\Admin\Module\ModuleController;
 use App\Http\Controllers\Admin\FooterMenu\FooterMenuController;
+use App\Http\Controllers\Admin\QuickMenu\QuickMenuController;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Support\Facades\Route;
@@ -36,7 +37,7 @@ Route::prefix('/panel')->middleware(['auth', 'checkRole'])->group(function () {
     });
 
     // Ana Menü Modüllerin yönlendirmeleri
-    Route::prefix('/menu-yonetimi/mainmenu')->group(function () {
+    Route::prefix('/menu-settings/mainmenu')->group(function () {
         Route::get('/', [MainMenuController::class, 'index'])->name('mainmenu');
         Route::get('/add', [MainMenuController::class, 'add'])->name('mainmenu.add');
         Route::post('/add', [MainMenuController::class, 'store'])->name('mainmenu.store');
@@ -46,7 +47,7 @@ Route::prefix('/panel')->middleware(['auth', 'checkRole'])->group(function () {
     });
 
     // Footer Menü Modüllerin yönlendirmeleri
-    Route::prefix('/menu-yonetimi/footermenu')->group(function () {
+    Route::prefix('/menu-settings/footermenu')->group(function () {
         Route::get('/', [FooterMenuController::class, 'index'])->name('footermenu');
         Route::get('/add', [FooterMenuController::class, 'add'])->name('footermenu.add');
         Route::post('/add', [FooterMenuController::class, 'store'])->name('footermenu.store');
@@ -55,9 +56,15 @@ Route::prefix('/panel')->middleware(['auth', 'checkRole'])->group(function () {
         Route::delete('/destroy/{id}', [FooterMenuController::class, 'destroy'])->name('footermenu.destroy');
     });
 
-    Route::get('/quickmenu', function () {
-        return view('panel.quickmenu.index');
-    })->name('quickmenu');
+    // Hızlı Menü Modüllerin yönlendirmeleri
+    Route::prefix('/menu-settings/quickmenu')->group(function () {
+        Route::get('/', [QuickMenuController::class, 'index'])->name('quickmenu');
+        Route::get('/add', [QuickMenuController::class, 'add'])->name('quickmenu.add');
+        Route::post('/add', [QuickMenuController::class, 'store'])->name('quickmenu.store');
+        Route::get('/edit/{id}', [QuickMenuController::class, 'edit'])->name('quickmenu.edit');
+        Route::post('/edit/{id}', [QuickMenuController::class, 'update'])->name('quickmenu.update');
+        Route::delete('/destroy/{id}', [QuickMenuController::class, 'destroy'])->name('quickmenu.destroy');
+    });
 
     // Limit Modülünün yönlendirmeleri
     Route::prefix('/limit')->group(function () {
