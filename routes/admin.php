@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin\Users\UsersController;
 use App\Http\Controllers\Admin\Activity\ActivityController;
 use App\Http\Controllers\Admin\Notice\NoticeController;
 use App\Http\Controllers\Admin\Settings\SettingsController;
+use App\Http\Controllers\Admin\Module\ModuleController;
+use App\Http\Controllers\Admin\FooterMenu\FooterMenuController;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Support\Facades\Route;
@@ -43,9 +45,16 @@ Route::prefix('/panel')->middleware(['auth', 'checkRole'])->group(function () {
         Route::delete('/destroy/{id}', [MainMenuController::class, 'destroy'])->name('mainmenu.destroy');
     });
 
-    Route::get('/footermenu', function () {
-        return view('panel.footermenu.index');
-    })->name('footermenu');
+    // Footer Menü Modüllerin yönlendirmeleri
+    Route::prefix('/menu-yonetimi/footermenu')->group(function () {
+        Route::get('/', [FooterMenuController::class, 'index'])->name('footermenu');
+        Route::get('/add', [FooterMenuController::class, 'add'])->name('footermenu.add');
+        Route::post('/add', [FooterMenuController::class, 'store'])->name('footermenu.store');
+        Route::get('/edit/{id}', [FooterMenuController::class, 'edit'])->name('footermenu.edit');
+        Route::post('/edit/{id}', [FooterMenuController::class, 'update'])->name('footermenu.update');
+        Route::delete('/destroy/{id}', [FooterMenuController::class, 'destroy'])->name('footermenu.destroy');
+    });
+
     Route::get('/quickmenu', function () {
         return view('panel.quickmenu.index');
     })->name('quickmenu');
@@ -62,10 +71,12 @@ Route::prefix('/panel')->middleware(['auth', 'checkRole'])->group(function () {
         Route::post('/update', [ThemeController::class, 'update'])->name('theme.update');
     });
 
+    // Modül Yönetim Modülünün yönlendirmeleri
+    Route::prefix('/module')->group(function () {
+        Route::get('/', [ModuleController::class, 'index'])->name('module');
+        Route::post('/update', [ModuleController::class, 'update'])->name('module.update');
+    });
 
-    Route::get('/module', function () {
-        return view('panel.module.index');
-    })->name('module');
 
     // Kullanıcı Modüllerin yönlendirmeleri
     Route::prefix('/users')->group(function () {

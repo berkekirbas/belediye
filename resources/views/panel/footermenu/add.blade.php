@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="col-12 mb-4">
-        <a href="{{ route('mainmenu') }}" class="btn btn-info">
+        <a href="{{ route('footermenu') }}" class="btn btn-info">
             <i class="align-middle" data-feather="arrow-left"></i>
             Geri Dön
         </a>
@@ -12,9 +12,9 @@
     <div class="col-12 col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title mb-0">Yeni Menü Ekle</h3>
+                <h3 class="card-title mb-0">Yeni Footer Menü Ekle</h3>
             </div>
-            <form class="card-body" action="{{ route('mainmenu.store') }}" method="POST">
+            <form class="card-body" action="{{ route('footermenu.store') }}" method="POST">
                 @csrf
 
                 <div class="form-group mb-3">
@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="form-group mb-3">
-                    <label class="form-label">Menü Adı</label>
+                    <label class="form-label">Footer Menü Adı</label>
                     <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                     <span class="text-danger">{{ $errors->first('name') }}</span>
                 </div>
@@ -54,19 +54,19 @@
                 </div>
 
                 <div class="form-group mb-3">
-                    <label class="form-label">Menü Url</label>
+                    <label class="form-label">Footer Menü Url</label>
                     <input type="text" class="form-control" name="url" id="url" value="{{ old('url') }}">
                     <span class="text-danger">{{ $errors->first('url') }}</span>
                 </div>
 
                 <div class="form-group mb-3">
-                    <label class="form-label">Menü Sırası</label>
+                    <label class="form-label">Footer Menü Sırası</label>
                     <input type="number" class="form-control" name="order" min="0" value="{{ old('order') }}">
                     <span class="text-danger">{{ $errors->first('order') }}</span>
                 </div>
 
                 <div class="form-group mb-3">
-                    <label class="form-label">Menü Sırası</label>
+                    <label class="form-label">Footer Menü Sırası</label>
                     <select name="open_type" id="open_type" class="form-control" value="{{ old('open_type') }}">
                         <option value="_self">Aynı Pencere</option>
                         <option value="_blank">Yeni Pencere</option>
@@ -75,7 +75,7 @@
                 </div>
 
                 <div class="form-group mb-3">
-                    <label class="form-label">Menü Aktif mi?</label>
+                    <label class="form-label">Footer Menü Aktif mi?</label>
                     <input type="checkbox" class="form-check-input" name="is_active" value="1"
                         {{ old('is_active') ? 'checked' : '' }}>
                     <span class="text-danger">{{ $errors->first('is_active') }}</span>
