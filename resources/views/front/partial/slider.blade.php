@@ -47,7 +47,8 @@
                         <div class="box mayor-container">
                             <div class="bskbslk">BELEDİYE BAŞKANI</div>
                             <div class="mayor-image">
-                                <img src="{{ $settings->baskan_photo }}" alt="{{ $settings->baskan_fullname }}">
+                                <img src="/storage/settings/{{ $settings->baskan_photo }}"
+                                    alt="{{ $settings->baskan_fullname }}">
                             </div>
 
                             <div class="mayor-tabs">
