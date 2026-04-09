@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\MainMenu;
+use App\Models\Settings;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +22,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        View::composer('front.layout.app', function ($view) {
+            $view->with('settings', Settings::first());
+            $view->with('main_menu', MainMenu::whereNull('parent_id')->get());
+        });
     }
 }

@@ -1,0 +1,248 @@
+/* Show it's not fixed to the top */
+body {
+  min-height: 75rem;
+}
+.menuback{
+	background: url(../images/background/bg2.jpg);
+}
+.navup{
+	padding-bottom:30px;
+	padding-top: 20px;
+	background: url(../images/background/navup.png);
+}
+.br1{
+	border-right: 1px solid #b8b8b8;
+}
+.logo{
+	 /*margin-left: calc(50% - 355px);*/
+	 margin-left: 32%;
+	 position: absolute;
+	 /*margin-top: 5px;*/
+}
+.w100{
+	width: 100%;
+}
+.logo-ayr{
+	position: absolute;
+	z-index: 99;
+	margin-top: -33px;
+}
+.t-center{
+	text-align: center;
+}
+.pt-50{
+	padding-top: 50px;
+}
+.mt-50{
+	margin-top: 50px;
+}
+.slide-desc{
+	position: absolute;
+	left: 0;
+	color: #fff;
+	bottom: 0;
+}
+.slide-in{
+	padding-left: 50px;
+	margin-bottom: 50px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 10px;
+	background: #c74b8cad;
+}
+.t-right-home{
+	text-align: right !important;
+}
+.ort-back{
+	background: url(../images/Slider-bg.png);
+	    background-repeat: no-repeat;
+    background-size: 100%;
+	margin-top: -25px;
+	    padding-bottom: 156px;
+}
+.swiper-pagination-bullet-active {
+    opacity: 1;
+    background: #c74b8cad !important;
+}
+.swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    display: inline-block;
+    border-radius: 100%;
+    background: #e6e6e6;
+    opacity: 0.2;
+}
+.takvim{
+	background: url(../images/Yuvarlak-Köseli-Dikdortgen-1-kopya.png); 
+}
+.btnBack1{
+	background-color: rgb(255, 255, 255);
+  box-shadow: inset 0px 0px 26.19px 0.81px rgba(4, 6, 3, 0.17);
+}
+.butonlar{
+	margin-top: 50px;
+}
+.butonlar-img{
+	margin-top: 20px;
+	padding: 0px 35px;
+	max-height: 35px;
+}
+.butonlar-text{
+	margin-top:10px;
+	line-height: 15px;
+}
+.Dikdörtgen_7_kopya {
+  
+  position: absolute;
+  left: 367px;
+  top: 698px;
+  width: 225px;
+  height: 200px;
+  z-index: 61;
+}
+.baskan-back{
+	background-image: url(../images/baskanback.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+.arrow-baskan{
+	position: absolute;
+	right: 0;
+	margin-right: 36%;
+	margin-top: -16px;
+}
+.duyuru{
+	background: url(../images/background/bg2.jpg);
+	margin-top: 30px;
+	overflow: hidden;
+}
+.haberler{
+	margin-top: 50px;
+}
+.haber-next{
+	color: #8d8989;
+    font-size: 45px;
+    opacity: 1;
+    top: auto;
+    right: 49%
+}
+.haber-next:hover{
+	color: #8d8989;
+    font-size: 45px;
+    opacity: 1;
+    top: auto;
+}
+.haber-next:focus{
+	color: #8d8989;
+    font-size: 45px;
+    opacity: 1;
+    top: auto;
+}
+.haber-prev{
+    color: #8d8989;
+    font-size: 45px;
+    opacity: 1;
+    top: auto;
+    left: 4%;
+}
+.haber-prev:hover{
+	color: #8d8989;
+    font-size: 45px;
+    opacity: 1;
+    top: auto;
+}
+.haber-prev:focus{
+	color: #8d8989;
+    font-size: 45px;
+    opacity: 1;
+    top: auto;
+}
+.num{
+    color: #8d8989;
+    padding: 10px;
+    width: 50px;
+    text-align: center;
+    font-size: 51px;
+    position: absolute;
+    left: 146px;
+    bottom: -23px;
+}
+.currentin{
+	font-size:50px;
+}
+.totalit{
+	font-size: 30px;
+}
+.news2{
+	color: #fff;
+	padding-top: 10px;
+}
+
+.hbr-ileri{
+	top: 17px !important;
+	background-image: none !important;
+	color: #fff;
+	right: 0 !important;
+	height: 20px !important;
+	font-size: 25px;
+	text-align: center;
+}
+.hbr-geri{
+	top: 38px !important;
+	background-image: none !important;
+	color: #fff;
+	right: 0 !important;
+	left: auto !important;
+	height: 20px !important;
+	font-size: 25px;
+	text-align: center;
+}
+.swiper2{
+	width: 100%;
+}
+.halkoyunlari{
+	margin-top: 50px;
+}
+.videogaleri{
+	color: #7a7c7e;
+}
+.galeri{
+	color: #a3406a;
+}
+.ililce{
+	color: #7a7c7e;
+	margin-top: 10px;
+}
+.bb1{
+	border-bottom: 3px solid #a3406a;
+}
+.halkoyunlari-ileri{
+	top: 17px !important;
+	background-image: none !important;
+	color: #878484;
+	left: 0 !important;
+	font-size: 50px;
+
+}
+.halkoyunlari-geri{
+	top: 250px !important;
+	background-image: none !important;
+	color: #878484;
+	left: 0 !important;
+	font-size: 50px;
+}
+.owerflow{
+	overflow: hidden;
+}
+.ml-35{
+	margin-left: 35px;
+}
+.halkoyunlari-bg{
+  border-radius: 8px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: inset 0px 0px 5px 0px rgba(4, 6, 3, 0.16);
+}
+.izle-btn{
+	border-left: 1px solid #878484;
+	margin-top: 10px;
+}
