@@ -4,9 +4,9 @@
              <div class="col-md-4 col-xs-12">
                  <div class="row pt-50 mobil_alan">
                      <div class="h_contact-links">
-                         <a href="tel:{{ $settings->phone ?? '0 (288) 533-4015' }}" class="call-center"><i
+                         <a href="tel:{{ $settings->phone }}" class="call-center"><i
                                  class="fa fa-phone" aria-hidden="true"></i>
-                             {{ $settings->phone ?? '0 (288) 533-4015' }}</a>
+                             {{ $settings->phone }}</a>
 
                          <a href="/iletisim">İletişim</a>
                      </div>

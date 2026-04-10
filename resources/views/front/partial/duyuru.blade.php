@@ -1,3 +1,8 @@
+@php
+
+    $duyurular = \App\Models\Notice::where('is_active', true)->orderBy('order')->get();
+
+@endphp
 <div class="haberler d-none d-lg-block">
     <div class="container">
         <div class="row">
@@ -12,16 +17,12 @@
 
                 <div class="swiper-container swiper2" style="position: absolute;">
                     <div class="swiper-wrapper">
+                        @foreach ($duyurular as $duyuru)
+
                         <div class="swiper-slide news2">
-                            <a href="duyuru/3194-sayili-imar-kanununun-18-madde-uygulamasi.html">3194 Sayılı İmar
-                                Kanununun 18. Madde Uygulaması</a>
+                            <a href="duyuru/#">{{ $duyuru->notice_translation()->title }}</a>
                         </div>
-                        <div class="swiper-slide news2">
-                            <a href="duyuru/kadina-el-kal-ka-maz.html">Kadına EL KAL-KA-MAZ</a>
-                        </div>
-                        <div class="swiper-slide news2">
-                            <a href="duyuru/imar-plani-tadilati.html">İmar Planı Tadilatı</a>
-                        </div>
+                        @endforeach
                     </div>
                     <!-- If we need navigation buttons -->
                     <div class="swiper-button-prev hbr-geri"><i class="fa fa-angle-down"></i></div>
