@@ -45,24 +45,29 @@
                     </div>
                 </form>
             </div>
+            @php
+               $taziyeler = \App\Models\Condolence::where('is_active', true)->get();
+            @endphp
             <div class="col-md-4">
                 <h4>Başkanın Mesajları</h4>
-                <h6>Taziye ve başsağlığı mesajları</h6>
+                <h6>Taziye ve Başsağlığı Mesajları</h6>
+
                 <div class="swiper7 taziye-back" style="overflow: hidden;">
                     <div class="swiper-wrapper ">
+                        @foreach($taziyeler as $taziye)
                         <div class="swiper-slide">
-                            <p class="taziye-text"><a href="mesaj/1.html">T&uuml;m B&uuml;y&uuml;kmandıra'lı
-                                    Hemşerilerimin M&uuml;barek Ramazan Bayramı&nbsp; Kutlu Olsun
-                                    &nbsp;</a></p>
-                            <h5>Ersan Çölgeçen</h5>
-                            <p>Belediye Başkanı</p>
+                            <p class="taziye-text"><a href="#">{{ $taziye->message }}</a></p>
+                            <h5>{{ $taziye->fullname }}</h5>
+                            <p>{{ $taziye->job }}</p>
                             <img style="border-radius: 100%;width: 90px;height: 90px;background: #fff;"
-                                src="assets/tema/belediye/uploads/favicon/dernek_logo_fav-01_1_1.png" class="img-fluid"
-                                alt="T.C. Büyükmandıra Belediyesi">
+                                src="/storage/settings/{{ $settings->favicon }}" class="img-fluid"
+                                alt="{{ $settings->title }}">
                         </div>
+                        @endforeach
                     </div>
                     <div class="swiper-pagination taziye-pagination"></div>
                 </div>
+
             </div>
         </div>
     </div>

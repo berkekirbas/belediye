@@ -44,7 +44,10 @@
                     },
                     {
                         data: 'is_active',
-                        name: 'is_active'
+                        name: 'is_active',
+                        render: function (data, type, row) {
+                            return data == 1 ? '<span class="badge bg-success">Aktif</span>' : '<span class="badge bg-danger">Pasif</span>';
+                        }
                     },
                     {
                         data: 'actions',
