@@ -1,56 +1,108 @@
+@php
+    $etkinlik = \App\Models\Activity::with([
+        'activity_translations:id,activity_id,title,start_date,end_date,content,location',
+    ])
+        ->where('is_active', true)
+        ->orderBy('order')
+        ->get();
+
+    $galeriler = \App\Models\PhotoGallery::with(['photo_gallery_translations:id,photo_gallery_id,title,slug'])
+        ->where('is_active', true)
+        ->orderBy('order')
+        ->get();
+@endphp
+
+
 <section class="section second">
     <div class="container">
         <div class="leftArea">
             <div class="bskbslk">Etkinlikler</div>
             <div id="my-calendar"></div>
+
             <script type="application/javascript">
-					var hasEvent = [
+                var etkinliklerimiz = @json($etkinlik);
+                var event = etkinliklerimiz.map(function(etkinlik){
+                var translation = etkinlik.activity_translations[0];
 
-						{
-							"date": "2020-03-08",
-							"badge": true,
-							"title": "8 Mart Dünya Kadınlar Günü",
-							"body": '<div class="row"><div class="col-md-4"><img src="assets/tema/belediye/uploads/etkinlik/8-mart-dunya-kadinlar-gunu.jpg" alt="8 Mart Dünya Kadınlar Günü" class="img-responsive etkinlik_a"><p class="bg-warning etkat"></p></div><div class="col-md-8"><table class="table table-hover" style="margin-bottom:-15px"><tbody> <tr> <th scope="row"><i class="fa fa-bookmark fagns"></i> Etkinlik</th> <td>8 Mart Dünya Kadınlar Günü</td> </tr> <tr> <th scope="row"><i class="fa fa-calendar fagns"></i> Başlama Tarihi</th> <td>08 Mart 2020, 09:18</td> </tr> <tr> <th scope="row"><i class="fa fa-calendar-o fagns"></i> Bitiş Tarihi</th> <td>  , </td> </tr> <tr> <th scope="row"><i class="fa fa-map-marker fagns"></i> Yer</th> <td></td> </tr> <tr> <th scope="row"></th> <td> <a href="etkinlik/8-mart-dunya-kadinlar-gunu.html" title="8 Mart Dünya Kadınlar Günü"><i class="fa fa-external-link-square"></i> <strong>ETKINLIK DETAYI</strong></a></td> </tr></tbody> </table> </div></div>',
-							"footer": "Etkinlik Takvimi"
+                var icerik = `
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img
+                                src="/storage/activity/${etkinlik.image}"
+                                alt="${translation.title}"
+                                class="img-responsive etkinlik_a"
+                            />
+                            <p class="bg-warning etkat"></p>
+                        </div>
+                        <div class="col-md-8">
+                            <table class="table table-hover" style="margin-bottom: -15px">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">
+                                            <i class="fa fa-bookmark fagns"> </i> Etkinlik
+                                        </th>
+                                        <td>${translation.title}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <i class="fa fa-calendar fagns"> </i> Başlama Tarihi
+                                        </th>
+                                        <td>${new Date(translation.start_date).toLocaleDateString('tr-TR')}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <i class="fa fa-calendar-o fagns"> </i> Bitiş Tarihi
+                                        </th>
+                                        <td>${new Date(translation.end_date).toLocaleDateString('tr-TR')}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <i class="fa fa-map-marker fagns"> </i>
+                                            Yer
+                                        </th>
+                                        <td>${translation.location}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"></th>
+                                        <td>
+                                            <a
+                                                href="etkinlik/${translation.slug}"
+                                                title="${translation.title}"
+                                            >
+                                                <i class="fa fa-external-link-square"> </i>
+                                                <strong> ETKINLIK DETAYI </strong>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `;
 
-						},
 
-						{
-							"date": "2019-09-25",
-							"badge": true,
-							"title": "Büyükmandıra Belediyesi Aşure Dağıtımı.",
-							"body": '<div class="row"><div class="col-md-4"><img src="assets/tema/belediye/uploads/etkinlik/buyukmandira-belediyesi-asure-dagitimi_1.jpg" alt="Büyükmandıra Belediyesi Aşure Dağıtımı." class="img-responsive etkinlik_a"><p class="bg-warning etkat"></p></div><div class="col-md-8"><table class="table table-hover" style="margin-bottom:-15px"><tbody> <tr> <th scope="row"><i class="fa fa-bookmark fagns"></i> Etkinlik</th> <td>Büyükmandıra Belediyesi Aşure Dağıtımı.</td> </tr> <tr> <th scope="row"><i class="fa fa-calendar fagns"></i> Başlama Tarihi</th> <td>25 Eylül 2019, 15:43</td> </tr> <tr> <th scope="row"><i class="fa fa-calendar-o fagns"></i> Bitiş Tarihi</th> <td>  , </td> </tr> <tr> <th scope="row"><i class="fa fa-map-marker fagns"></i> Yer</th> <td>Büyükmandıra Sabit Pazar Yeri</td> </tr> <tr> <th scope="row"></th> <td> <a href="etkinlik/buyukmandira-belediyesi-asure-dagitimi.html" title="Büyükmandıra Belediyesi Aşure Dağıtımı."><i class="fa fa-external-link-square"></i> <strong>ETKINLIK DETAYI</strong></a></td> </tr></tbody> </table> </div></div>',
-							"footer": "Etkinlik Takvimi"
 
-						},
+                console.log(icerik);
 
-						{
-							"date": "2019-06-07",
-							"badge": true,
-							"title": "Geleneksel Yağlı Pehlivan Güreşleri ve At Yarışları",
-							"body": '<div class="row"><div class="col-md-4"><img src="assets/tema/belediye/uploads/etkinlik/geleneksel-yagli-pehlivan-guresleri-ve-at-yarislari.jpg" alt="Geleneksel Yağlı Pehlivan Güreşleri ve At Yarışları" class="img-responsive etkinlik_a"><p class="bg-warning etkat"></p></div><div class="col-md-8"><table class="table table-hover" style="margin-bottom:-15px"><tbody> <tr> <th scope="row"><i class="fa fa-bookmark fagns"></i> Etkinlik</th> <td>Geleneksel Yağlı Pehlivan Güreşleri ve At Yarışları</td> </tr> <tr> <th scope="row"><i class="fa fa-calendar fagns"></i> Başlama Tarihi</th> <td>07 Haziran 2019, 11:00</td> </tr> <tr> <th scope="row"><i class="fa fa-calendar-o fagns"></i> Bitiş Tarihi</th> <td>07 Haziran 2019, 15:00</td> </tr> <tr> <th scope="row"><i class="fa fa-map-marker fagns"></i> Yer</th> <td>Büyükmandıra Futbol Sahası</td> </tr> <tr> <th scope="row"></th> <td> <a href="etkinlik/geleneksel-yagli-pehlivan-guresleri-ve-at-yarislari.html" title="Geleneksel Yağlı Pehlivan Güreşleri ve At Yarışları"><i class="fa fa-external-link-square"></i> <strong>ETKINLIK DETAYI</strong></a></td> </tr></tbody> </table> </div></div>',
-							"footer": "Etkinlik Takvimi"
+                    return {
+                        date: translation.start_date,
+                        badge: true,
+                        title: translation.title,
+                        body:  icerik,
+                        footer: "Etkinlik Takvimi"
+                    }
+                });
 
-						},
 
-						{
-							"date": "2023-06-04",
-							"badge": true,
-							"title": "Geleneksel Yağlı Pehlivan Güreşleri ve At Yarışlerı",
-							"body": '<div class="row"><div class="col-md-4"><img src="assets/tema/belediye/uploads/etkinlik/geleneksel-yagli-pehlivan-guresleri-ve-at-yarisleri.jpg" alt="Geleneksel Yağlı Pehlivan Güreşleri ve At Yarışlerı" class="img-responsive etkinlik_a"><p class="bg-warning etkat"></p></div><div class="col-md-8"><table class="table table-hover" style="margin-bottom:-15px"><tbody> <tr> <th scope="row"><i class="fa fa-bookmark fagns"></i> Etkinlik</th> <td>Geleneksel Yağlı Pehlivan Güreşleri ve At Yarışlerı</td> </tr> <tr> <th scope="row"><i class="fa fa-calendar fagns"></i> Başlama Tarihi</th> <td>04 Haziran 2023, 10:00</td> </tr> <tr> <th scope="row"><i class="fa fa-calendar-o fagns"></i> Bitiş Tarihi</th> <td>04 Haziran 2023, 18:00</td> </tr> <tr> <th scope="row"><i class="fa fa-map-marker fagns"></i> Yer</th> <td>Büyükmandıra Futbol Sahası</td> </tr> <tr> <th scope="row"></th> <td> <a href="etkinlik/geleneksel-yagli-pehlivan-guresleri-ve-at-yarisleri.html" title="Geleneksel Yağlı Pehlivan Güreşleri ve At Yarışlerı"><i class="fa fa-external-link-square"></i> <strong>ETKINLIK DETAYI</strong></a></td> </tr></tbody> </table> </div></div>',
-							"footer": "Etkinlik Takvimi"
-
-						},
-					];
-					$(document).ready(function() {
-						$("#my-calendar").zabuto_calendar({
-							data: hasEvent,
-							cell_border: true,
-							today: true,
-							language: "tr"
-						});
-					});
-				</script>
+                $(document).ready(function() {
+                    $("#my-calendar").zabuto_calendar({
+                            data: event,
+                            cell_border: true,
+                            today: true,
+                            language: "tr"
+                        });
+                    });
+			</script>
         </div>
 
         <div class="rightArea" id="tabmenu">
@@ -63,56 +115,40 @@
             <div class="tabAreaContainer">
                 <div class="webofisiTabContent" id="tabAreaContent">
                     <div class="tabAreaSliding">
-                        <div id="owl-demo3" class="owl-carousel">
-                            <div class="item">
-                                <a href="foto/baskan-album.html">
-                                    <div class="photo">
-                                        <div class="photoContent">
-                                            <img
-                                                src="assets/tema/belediye/uploads/fotogaleri/kapak/kucuk/baskan-album.jpg">
+                        <div id="owl" class="owl-carousel">
+                            @foreach ($galeriler as $galeri)
+                                <div class="item">
+                                    <a href="{{ url('foto-galeri/' . $galeri->photo_gallery_translations[0]->slug) }}">
+                                        <div class="photo">
+                                            <div class="photoContent">
+                                                <img src="/storage/photo-galleries/{{ $galeri->image }}"
+                                                    alt="{{ $galeri->photo_gallery_translations[0]->title }}">
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="description">
-                                        <div class="content">
-                                            <h3 class="title">Başkan Albüm</h3>
-                                            <h3 class="text">
-                                                <p></p>
-                                            </h3>
+                                        <div class="description">
+                                            <div class="content">
+                                                <h3 class="title">{{ $galeri->photo_gallery_translations[0]->title }}
+                                                </h3>
+                                                <h3 class="text">
+                                                    <p></p>
+                                                </h3>
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="item">
-                                <a href="foto/buyukmandira-halkimizdan-gelen-eski-fotograflar.html">
-                                    <div class="photo">
-                                        <div class="photoContent">
-                                            <img
-                                                src="assets/tema/belediye/uploads/fotogaleri/kapak/kucuk/buyukmandira-halkimizdan-gelen-eski-fotograflar.jpg">
-                                        </div>
-                                    </div>
-
-                                    <div class="description">
-                                        <div class="content">
-                                            <h3 class="title">Büyükmandıra Halkımızdan Gelen Eski Fotoğraflar</h3>
-                                            <h3 class="text">
-                                                <p></p>
-                                            </h3>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
+                                    </a>
+                                </div>
+                            @endforeach
 
                         </div>
 
                         <div class="tabAreaBtn"><a href="foto-galeri.html">TÜMÜNÜ GÖSTER</a></div>
 
                         <style>
-                            #owl-demo3 .item {
+                            #owl .item {
                                 margin: 0 10px;
                             }
 
-                            #owl-demo3 .item a {
+                            #owl .item a {
                                 float: left;
                                 position: relative;
                                 width: 100%;
@@ -122,7 +158,7 @@
                         <script type="text/javascript">
                             $(document).ready(function() {
 
-                                $("#owl-demo3").owlCarousel({
+                                $("#owl").owlCarousel({
                                     responsiveClass: true,
                                     responsive: {
                                         320: {
@@ -145,12 +181,11 @@
                                     smartSpeed: 1000,
                                     autoplay: true,
                                     autoplayTimeout: 4000,
-                                    loop: true,
+                                    loop: false,
                                     autoplayHoverPause: true,
                                     nav: true
 
                                 });
-
                             });
                         </script>
                     </div>
