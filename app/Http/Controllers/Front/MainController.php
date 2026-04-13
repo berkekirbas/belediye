@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Activity;
 use App\Models\Condolence;
 use App\Models\News;
+use App\Models\NewsTranslation;
 use App\Models\Notice;
 use App\Models\Page;
 use App\Models\PhotoGallery;
 use App\Models\Project;
+use App\Models\ProjectCategory;
+use App\Models\ProjectTranslation;
 use App\Models\QuickMenu;
 use App\Models\StaffGroup;
 use Illuminate\Http\Request;
@@ -18,7 +21,7 @@ class MainController extends Controller
 {
     public function main()
     {
-        $duyurular = Notice::with('notice_translation')->where('is_active', true)->orderBy('order')->get();
+        $duyurular = Notice::with('notice_translations')->where('is_active', true)->orderBy('order')->get();
 
         $etkinlik = Activity::with([
             'activity_translations:id,activity_id,title,start_date,end_date,content,location',
@@ -32,7 +35,7 @@ class MainController extends Controller
             ->orderBy('order')
             ->get();
 
-        $taziyeler = Condolence::with('condolence_translation')->where('is_active', true)->get();
+        $taziyeler = Condolence::where('is_active', true)->get();
 
         $projeler = Project::with('project_translations')->where('is_active', true)->orderBy('order')->get();
 
@@ -51,17 +54,14 @@ class MainController extends Controller
                     $query->where('slug', $slug);
                 })->first();
 
-                if (!$page) {
-                    abort(404);
-                }
-
+                if (!$page) { abort(404);}
                 $quickMenu = QuickMenu::where('is_active', true)->orderBy('order')->get();
 
                 return view('front.page', compact('page', 'quickMenu', 'page_type'));
 
-
                 break;
             case 'kurumsal-yapi':
+
                 $quickMenu = QuickMenu::where('is_active', true)->orderBy('order')->get();
                 $staffGroup = StaffGroup::with('staffs')->where(['is_active' => true, 'slug' => $slug])->orderBy('order')->first();
 
@@ -69,10 +69,28 @@ class MainController extends Controller
 
                 break;
             case 'kategori':
+
+                $quickMenu = QuickMenu::where('is_active', true)->orderBy('order')->get();
+                $projectCategory = ProjectCategory::with('projects.project_translations')->where(['is_active' => true, 'slug' => $slug])->orderBy('order')->first();
+
+                return view('front.page', compact('quickMenu', 'page_type', 'projectCategory'));
+
                 break;
-            case 'foto':
+            case 'proje':
+
+                $quickMenu = QuickMenu::where('is_active', true)->orderBy('order')->get();
+                $project = ProjectTranslation::with('project.images')->where('slug', $slug)->first();
+
+                return view('front.page', compact('quickMenu', 'page_type', 'project'));
+
                 break;
             case 'haber':
+
+                $quickMenu = QuickMenu::where('is_active', true)->orderBy('order')->get();
+                $new = NewsTranslation::with('news.images')->where('slug', $slug)->first();
+
+                return view('front.page', compact('quickMenu', 'page_type', 'new'));
+
                 break;
             case 'foto-galeri':
                 break;
@@ -85,6 +103,10 @@ class MainController extends Controller
             case 'haberler':
                 break;
             case 'iletisim':
+                break;
+            case 'mesaj':
+                break;
+            case 'foto':
                 break;
             default:
                 abort(404);

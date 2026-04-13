@@ -24,7 +24,7 @@
 
                 <div class="form-group mb-3">
                     <label class="form-label">Url</label>
-                    <input type="text" class="form-control" name="slug" id="slug" value="{{ old('slug') }}">
+                    <input type="text" class="form-control" name="slug" id="slug" value="{{ old('slug') }}" readonly>
                     <span class="text-danger">{{ $errors->first('slug') }}</span>
                 </div>
 
