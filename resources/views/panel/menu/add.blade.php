@@ -38,22 +38,35 @@
                 </div>
 
                 <div class="form-group mb-3">
-                    <label class="form-label">Sayfa Seçin</label>
-                    <select name="page_id" id="page_id" class="form-control">
-                        <option value="">Sayfa Seçilmedi (Manuel URL)</option>
-                        @foreach ($pages as $p)
-                            @php $pt = $p->translation('tr'); @endphp
-                            @if ($pt)
-                                <option value="{{ $p->id }}" data-slug="{{ $pt->slug }}"
-                                    {{ old('page_id') == $p->id ? 'selected' : '' }}>
-                                    {{ $pt->title }}
-                                </option>
-                            @endif
-                        @endforeach
+                    <label class="form-label">Menü Türü (Adres)</label>
+                    <select name="menu_type" id="menu_type" class="form-control">
+                        <option value="0">Diğer (Manuel Link Ekle)</option>
+                        <option value="/">Anasayfa</option>
+                        <optgroup label="Sayfalarım">
+                            <option value="/sayfa">Sayfalar</option>
+                        </optgroup>
+                        <optgroup label="Hizmetlerim">
+                            <option value="hizmet/icme-su-isleri.html">İçme Su İşleri</option>
+                        </optgroup>
+                        <optgroup label="Kurumsal Yapı">
+                            <option value="kurumsal-yapi/belediye-personeli.html">Belediye Personeli</option>
+                        </optgroup>
+                        <optgroup label="Proje Kategori">
+                            <option value="kategori/devam-eden-projelerimiz.html">Devam Eden Projelerimiz</option>
+                        </optgroup>
+                        <optgroup label="Sabit Sayfalar">
+                            <option value="/foto-galeri">Foto Galeri</option>
+                            <option value="/video-galeri">Video Galeri</option>
+                            <option value="/etkinlikler">Etkinlikler</option>
+                            <option value="/duyurular">Duyurular</option>
+                            <option value="/haberler">Haberler</option>
+                            <option value="/iletisim">İletişim</option>
+                        </optgroup>
                     </select>
+                    <span class="text-danger">{{ $errors->first('menu_type') }}</span>
                 </div>
 
-                <div class="form-group mb-3">
+                <div id="menuUrldiv" class="form-group mb-3">
                     <label class="form-label">Menü Url</label>
                     <input type="text" class="form-control" name="url" id="url" value="{{ old('url') }}">
                     <span class="text-danger">{{ $errors->first('url') }}</span>
@@ -91,12 +104,16 @@
 
 @section('js')
     <script>
-        document.getElementById('page_id').addEventListener('change', function() {
-            const selected = this.options[this.selectedIndex];
-            const slug = selected.getAttribute('data-slug');
-            if (slug) {
-                document.getElementById('url').value = '/' + slug;
-            }
+
+        $(document).ready(function() {
+            $('#menu_type').change(function() {
+                if ($(this).val() === '0') {
+                    $('#url').val('').prop('readonly', false);
+                } else {
+                    $('#url').prop('readonly', true);
+                    $('#url').val($(this).val());
+                }
+            });
         });
 
     </script>

@@ -14,7 +14,8 @@ class MenuCreateRequest extends FormRequest
             'url' => ['required', 'string', 'max:255'],
             'order' => ['required', 'integer', 'min:0'],
             'open_type' => ['required', 'in:_self,_blank'],
-            'is_active' => ['nullable', 'boolean']
+            'is_active' => ['nullable', 'boolean'],
+            'menu_type' => ['required', 'in:dropdown,link'],
 
         ];
     }
@@ -33,7 +34,9 @@ class MenuCreateRequest extends FormRequest
             'order.min' => 'Menü sırası 0 veya daha büyük olmalıdır.',
             'open_type.required' => 'Menü açılma türü zorunludur.',
             'open_type.in' => 'Menü açılma türü _self veya _blank olmalıdır.',
-            'is_active.boolean' => 'Menü aktiflik durumu true veya false olmalıdır.'
+            'is_active.boolean' => 'Menü aktiflik durumu true veya false olmalıdır.',
+            'menu_type.required' => 'Menü türü zorunludur.',
+            'menu_type.in' => 'Menü türü dropdown veya link olmalıdır.',
         ];
     }
 }
