@@ -16,13 +16,11 @@ class MainMenu extends Model
     public $fillable = [
         'name',
         'parent_id',
-        'menu_type',
         'url',
         'language_code',
         'order',
         'is_active',
         'open_type',
-        'page_id',
     ];
 
     public function children()
@@ -38,10 +36,5 @@ class MainMenu extends Model
     public function parent()
     {
         return $this->belongsTo(MainMenu::class, 'parent_id');
-    }
-
-    public function page()
-    {
-        return $this->belongsTo(Page::class, 'page_id');
     }
 }

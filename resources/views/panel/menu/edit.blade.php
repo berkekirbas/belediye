@@ -9,6 +9,7 @@
     </div>
 
 
+
     <div class="col-12 col-lg-12">
         <div class="card">
             <div class="card-header">
@@ -39,22 +40,53 @@
                 </div>
 
                 <div class="form-group mb-3">
-                    <label class="form-label">Sayfa Seçin</label>
-                    <select name="page_id" id="page_id" class="form-control">
-                        <option value="">Sayfa Seçilmedi (Manuel URL)</option>
-                        @foreach ($pages as $p)
-                            @php $pt = $p->translation('tr'); @endphp
-                            @if ($pt)
-                                <option value="{{ $p->id }}" data-slug="{{ $pt->slug }}"
-                                    {{ old('page_id', $menu->page_id) == $p->id ? 'selected' : '' }}>
-                                    {{ $pt->title }}
+                    <label class="form-label">Menü Türü (Adres)</label>
+                    <select name="menu_type" id="menu_type" class="form-control">
+                        <option value="0">Diğer (Manuel Link Ekle)</option>
+                        <option value="/">Anasayfa</option>
+                        <optgroup label="Sayfalarım">
+                            @foreach ($pages as $page)
+                                <option value="/sayfa/{{ $page->translation()->slug }}"
+                                    {{ $menu->url === '/sayfa/' . $page->translation()->slug ? ' selected' : '' }}>
+                                    {{ $page->translation()->title }}
                                 </option>
-                            @endif
-                        @endforeach
+                            @endforeach
+                        </optgroup>
+                        <optgroup label="Kurumsal Yapı">
+                            @foreach ($staff as $staffGroup)
+                                <option value="/kurumsal-yapi/{{ $staffGroup->slug }}"
+                                    {{ $menu->url === '/kurumsal-yapi/' . $staffGroup->slug ? ' selected' : '' }}>
+                                    {{ $staffGroup->name }}
+                                </option>
+                            @endforeach
+                        </optgroup>
+                        <optgroup label="Proje Kategori">
+                            @foreach ($project as $category)
+                                <option value="/kategori/{{ $category->slug }}"
+                                    {{ $menu->url === '/kategori/' . $category->slug ? ' selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </optgroup>
+                        <optgroup label="Foto Galeri">
+                            @foreach ($photo_gallery as $gallery)
+                                <option value="/foto/{{ $gallery->photo_gallery_translation()->slug }}">
+                                    {{ $gallery->photo_gallery_translation()->title }}</option>
+                            @endforeach
+                        </optgroup>
+
+                        <optgroup label="Sabit Sayfalar">
+                            <option value="/foto-galeri">Foto Galeri</option>
+                            <option value="/video-galeri">Video Galeri</option>
+                            <option value="/etkinlikler">Etkinlikler</option>
+                            <option value="/duyurular">Duyurular</option>
+                            <option value="/haberler">Haberler</option>
+                            <option value="/iletisim">İletişim</option>
+                        </optgroup>
                     </select>
                 </div>
 
-                <div class="form-group mb-3">
+                <div id="menuUrldiv" class="form-group mb-3">
                     <label class="form-label">Menü Url</label>
                     <input type="text" class="form-control" name="url" id="url"
                         value="{{ old('url', $menu->url) }}">
@@ -95,12 +127,15 @@
 
 @section('js')
     <script>
-        document.getElementById('page_id').addEventListener('change', function() {
-            const selected = this.options[this.selectedIndex];
-            const slug = selected.getAttribute('data-slug');
-            if (slug) {
-                document.getElementById('url').value = '/' + slug;
-            }
+        $(document).ready(function() {
+            $('#menu_type').change(function() {
+                if ($(this).val() === '0') {
+                    $('#url').val('').prop('readonly', false);
+                } else {
+                    $('#url').prop('readonly', true);
+                    $('#url').val($(this).val());
+                }
+            });
         });
     </script>
 @endsection

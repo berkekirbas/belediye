@@ -44,7 +44,8 @@
                         <option value="/">Anasayfa</option>
                         <optgroup label="Sayfalarım">
                             @foreach ($pages as $page)
-                                <option value="/sayfa/{{ $page->translation()->slug }}">{{ $page->translation()->title }}</option>
+                                <option value="/sayfa/{{ $page->translation()->slug }}">{{ $page->translation()->title }}
+                                </option>
                             @endforeach
                         </optgroup>
                         <optgroup label="Kurumsal Yapı">
@@ -55,6 +56,12 @@
                         <optgroup label="Proje Kategori">
                             @foreach ($project as $category)
                                 <option value="/kategori/{{ $category->slug }}">{{ $category->name }}</option>
+                            @endforeach
+                        </optgroup>
+                        <optgroup label="Foto Galeri">
+                            @foreach ($photo_gallery as $gallery)
+                                <option value="/foto/{{ $gallery->photo_gallery_translation()->slug }}">
+                                    {{ $gallery->photo_gallery_translation()->title }}</option>
                             @endforeach
                         </optgroup>
                         <optgroup label="Sabit Sayfalar">
@@ -106,7 +113,6 @@
 
 @section('js')
     <script>
-
         $(document).ready(function() {
             $('#menu_type').change(function() {
                 if ($(this).val() === '0') {
@@ -117,6 +123,5 @@
                 }
             });
         });
-
     </script>
 @endsection

@@ -10,7 +10,7 @@ class CondolenceCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'fullname' => ['required', 'string', 'max:255'],
+            'fullname' => ['required', 'string', 'max:255', 'unique:condolence,fullname'],
             'job' => ['nullable', 'string', 'max:255'],
             'message' => ['required', 'string'],
             'is_active' => ['nullable', 'boolean']
@@ -23,6 +23,7 @@ class CondolenceCreateRequest extends FormRequest
             'fullname.required' => 'Ad soyad zorunludur.',
             'fullname.string' => 'Ad soyad metin olmalıdır.',
             'fullname.max' => 'Ad soyad en fazla 255 karakter olabilir.',
+            'fullname.unique' => 'Bu ad soyad zaten mevcut. Dinamik Url oluştururken çakışmayı önlemek için benzersiz olmalıdır.',
             'job.nullable' => 'Meslek isteğe bağlıdır.',
             'job.string' => 'Meslek metin olmalıdır.',
             'job.max' => 'Meslek en fazla 255 karakter olabilir.',
@@ -33,4 +34,3 @@ class CondolenceCreateRequest extends FormRequest
         ];
     }
 }
-

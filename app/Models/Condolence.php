@@ -19,5 +19,6 @@ class Condolence extends Model
         'is_active',
         'language_code',
         'message',
+        'slug'
     ];
 }

@@ -89,6 +89,7 @@ class ActivityController extends Controller
                 'title' => $request->title,
                 'content' => $request->content,
                 'location' => $request->location,
+                'slug' => Str::slug($request->title),
                 'meta_keywords' => $request->meta_keywords,
                 'meta_description' => $request->meta_description,
                 'start_date' => $request->start_date,
@@ -140,6 +141,7 @@ class ActivityController extends Controller
                     'end_date' => $request->end_date,
                     'meta_keywords' => $request->meta_keywords,
                     'meta_description' => $request->meta_description,
+                    'slug' => Str::slug($request->title),
                 ]);
             } else {
                 $activity->translations()->create([
@@ -151,6 +153,7 @@ class ActivityController extends Controller
                     'end_date' => $request->end_date,
                     'meta_keywords' => $request->meta_keywords,
                     'meta_description' => $request->meta_description,
+                    'slug' => Str::slug($request->title),
                 ]);
             }
         } catch (\Exception $e) {

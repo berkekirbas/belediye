@@ -6,13 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CondolenceCreateRequest;
 use App\Models\Condolence;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Str;
 
 class CondolenceController extends Controller
 {
     public function index(Request $request)
     {
-       if ($request->ajax()) {
+        if ($request->ajax()) {
 
             $condolences = Condolence::query();
 
@@ -48,6 +48,7 @@ class CondolenceController extends Controller
             Condolence::create([
                 'fullname' => $request->fullname,
                 'job' => $request->job,
+                'slug' => Str::slug($request->fullname),
                 'is_active' => $request->has('is_active') ? 1 : 0,
                 'message' => $request->message
             ]);
@@ -56,7 +57,6 @@ class CondolenceController extends Controller
         }
 
         return redirect()->route('condolence')->with('success', 'Taziye Başsağlığı Başarıyla Eklendi');
-
     }
 
     public function edit($id)
@@ -73,6 +73,7 @@ class CondolenceController extends Controller
             $condolence->update([
                 'fullname' => $request->fullname,
                 'job' => $request->job,
+                'slug' => Str::slug($request->fullname),
                 'is_active' => $request->has('is_active') ? 1 : 0,
                 'message' => $request->message
             ]);
@@ -90,5 +91,4 @@ class CondolenceController extends Controller
 
         return redirect()->route('condolence')->with('success', 'Taziye Başsağlığı Başarıyla Silindi');
     }
-
 }

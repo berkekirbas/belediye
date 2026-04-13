@@ -11,6 +11,7 @@ use App\Models\Page;
 use App\Models\PhotoGallery;
 use App\Models\Project;
 use App\Models\QuickMenu;
+use App\Models\StaffGroup;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -41,18 +42,53 @@ class MainController extends Controller
         return view('front.main', compact('duyurular', 'etkinlik', 'galeriler', 'taziyeler', 'projeler', 'haberler'));
     }
 
-    public function page($slug)
+    public function page($page_type, $slug = null)
     {
-        $page = Page::with('translations')->whereHas('translations', function ($query) use ($slug) {
-            $query->where('slug', $slug);
-        })->first();
 
-        if (!$page) {
-            abort(404);
+        switch ($page_type) {
+            case 'sayfa':
+                $page = Page::with('translations')->whereHas('translations', function ($query) use ($slug) {
+                    $query->where('slug', $slug);
+                })->first();
+
+                if (!$page) {
+                    abort(404);
+                }
+
+                $quickMenu = QuickMenu::where('is_active', true)->orderBy('order')->get();
+
+                return view('front.page', compact('page', 'quickMenu', 'page_type'));
+
+
+                break;
+            case 'kurumsal-yapi':
+                $quickMenu = QuickMenu::where('is_active', true)->orderBy('order')->get();
+                $staffGroup = StaffGroup::with('staffs')->where(['is_active' => true, 'slug' => $slug])->orderBy('order')->first();
+
+                return view('front.page', compact('quickMenu', 'page_type', 'staffGroup'));
+
+                break;
+            case 'kategori':
+                break;
+            case 'foto':
+                break;
+            case 'haber':
+                break;
+            case 'foto-galeri':
+                break;
+            case 'video-galeri':
+                break;
+            case 'etkinlikler':
+                break;
+            case 'duyurular':
+                break;
+            case 'haberler':
+                break;
+            case 'iletisim':
+                break;
+            default:
+                abort(404);
+                break;
         }
-
-        $quickMenu = QuickMenu::where('is_active', true)->orderBy('order')->get();
-
-        return view('front.page', compact('page', 'quickMenu'));
     }
 }

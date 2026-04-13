@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\MenuCreateRequest;
 use App\Models\MainMenu;
 use App\Models\Page;
+use App\Models\PhotoGallery;
+use App\Models\PhotoGalleryTranslation;
 use App\Models\StaffGroup;
 use App\Models\ProjectCategory;
 use Illuminate\Http\Request;
@@ -98,7 +100,8 @@ class MainMenuController extends Controller
         $pages = Page::with('translations')->where('is_active', true)->orderBy('order')->get();
         $staff = StaffGroup::where('is_active', true)->orderBy('order')->get();
         $project = ProjectCategory::where('is_active', true)->orderBy('order')->get();
-        return view('panel.menu.add', compact('menuTree', 'pages', 'staff', 'project'));
+        $photo_gallery = PhotoGallery::with('photo_gallery_translations')->where('is_active', true)->orderBy('order')->get();
+        return view('panel.menu.add', compact('menuTree', 'pages', 'staff', 'project', 'photo_gallery'));
     }
 
     public function store(MenuCreateRequest $request)
@@ -106,13 +109,11 @@ class MainMenuController extends Controller
         try {
             MainMenu::create([
                 'name' => $request->name,
-                'menu_type' => $request->menu_type,
                 'url' => $request->url,
                 'order' => (int)$request->order,
                 'parent_id' => (int) $request->parent_id == -1 ? null : (int) $request->parent_id,
                 'open_type' => $request->open_type,
                 'is_active' => $request->has('is_active') ? 1 : 0,
-                'page_id' => $request->page_id ?: null,
             ]);
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->withErrors(['error' => 'Menü oluşturulurken bir hata oluştu: ' . $e->getMessage()]);
@@ -132,7 +133,8 @@ class MainMenuController extends Controller
         $pages = Page::with('translations')->where('is_active', true)->orderBy('order')->get();
         $staff = StaffGroup::where('is_active', true)->orderBy('order')->get();
         $project = ProjectCategory::where('is_active', true)->orderBy('order')->get();
-        return view('panel.menu.edit', compact('menu', 'menuTree', 'pages', 'staff', 'project'));
+        $photo_gallery = PhotoGallery::with('photo_gallery_translations')->where('is_active', true)->orderBy('order')->get();
+        return view('panel.menu.edit', compact('menu', 'menuTree', 'pages', 'staff', 'project', 'photo_gallery'));
     }
 
     public function update(MenuCreateRequest $request, $id)
@@ -146,7 +148,6 @@ class MainMenuController extends Controller
                 'order' => (int)$request->order,
                 'open_type' => $request->open_type,
                 'is_active' => $request->has('is_active') ? 1 : 0,
-                'page_id' => $request->page_id ?: null,
             ]);
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->withErrors(['error' => 'Menü güncellenirken bir hata oluştu: ' . $e->getMessage()]);

@@ -21,7 +21,6 @@ class FooterMenu extends Model
         'order',
         'is_active',
         'open_type',
-        'page_id',
     ];
 
     public function children()
@@ -37,10 +36,5 @@ class FooterMenu extends Model
     public function parent()
     {
         return $this->belongsTo(FooterMenu::class, 'parent_id');
-    }
-
-    public function page()
-    {
-        return $this->belongsTo(Page::class, 'page_id');
     }
 }

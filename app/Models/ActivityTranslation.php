@@ -18,6 +18,7 @@ class ActivityTranslation extends Model
         'meta_description',
         'end_date',
         'start_date',
+        'slug'
     ];
 
     public function activity()

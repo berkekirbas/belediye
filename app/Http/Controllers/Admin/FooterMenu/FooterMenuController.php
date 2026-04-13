@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\FooterMenuCreateRequest;
 use App\Models\FooterMenu;
 use App\Models\Page;
+use App\Models\StaffGroup;
+use App\Models\ProjectCategory;
+use App\Models\PhotoGallery;
 use Illuminate\Http\Request;
 
 
@@ -94,7 +97,10 @@ class FooterMenuController extends Controller
             ->get();
         $menuTree = $this->buildMenuTree($menus);
         $pages = Page::with('translations')->where('is_active', true)->orderBy('order')->get();
-        return view('panel.footermenu.add', compact('menuTree', 'pages'));
+        $staff = StaffGroup::where('is_active', true)->orderBy('order')->get();
+        $project = ProjectCategory::where('is_active', true)->orderBy('order')->get();
+        $photo_gallery = PhotoGallery::with('photo_gallery_translations')->where('is_active', true)->orderBy('order')->get();
+        return view('panel.footermenu.add', compact('menuTree', 'pages', 'staff', 'project', 'photo_gallery'));
     }
 
     public function store(FooterMenuCreateRequest $request)
@@ -107,7 +113,6 @@ class FooterMenuController extends Controller
                 'parent_id' => (int) $request->parent_id == -1 ? null : (int) $request->parent_id,
                 'open_type' => $request->open_type,
                 'is_active' => $request->has('is_active') ? 1 : 0,
-                'page_id' => $request->page_id ?: null,
             ]);
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->withErrors(['error' => 'Footer Menü oluşturulurken bir hata oluştu: ' . $e->getMessage()]);
@@ -125,7 +130,10 @@ class FooterMenuController extends Controller
             ->get();
         $menuTree = $this->buildMenuTree($menus, 0, $menu->id);
         $pages = Page::with('translations')->where('is_active', true)->orderBy('order')->get();
-        return view('panel.footermenu.edit', compact('menu', 'menuTree', 'pages'));
+        $staff = StaffGroup::where('is_active', true)->orderBy('order')->get();
+        $project = ProjectCategory::where('is_active', true)->orderBy('order')->get();
+        $photo_gallery = PhotoGallery::with('photo_gallery_translations')->where('is_active', true)->orderBy('order')->get();
+        return view('panel.footermenu.edit', compact('menu', 'menuTree', 'pages', 'staff', 'project', 'photo_gallery'));
     }
 
     public function update(FooterMenuCreateRequest $request, $id)
@@ -139,7 +147,6 @@ class FooterMenuController extends Controller
                 'order' => (int)$request->order,
                 'open_type' => $request->open_type,
                 'is_active' => $request->has('is_active') ? 1 : 0,
-                'page_id' => $request->page_id ?: null,
             ]);
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->withErrors(['error' => 'Footer Menü güncellenirken bir hata oluştu: ' . $e->getMessage()]);
