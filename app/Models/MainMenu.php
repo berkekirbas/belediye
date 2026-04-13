@@ -16,6 +16,7 @@ class MainMenu extends Model
     public $fillable = [
         'name',
         'parent_id',
+        'menu_type',
         'url',
         'language_code',
         'order',

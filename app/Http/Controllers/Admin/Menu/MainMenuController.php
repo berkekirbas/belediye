@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\MenuCreateRequest;
 use App\Models\MainMenu;
 use App\Models\Page;
+use App\Models\StaffGroup;
+use App\Models\ProjectCategory;
 use Illuminate\Http\Request;
 
 
@@ -94,7 +96,9 @@ class MainMenuController extends Controller
             ->get();
         $menuTree = $this->buildMenuTree($menus);
         $pages = Page::with('translations')->where('is_active', true)->orderBy('order')->get();
-        return view('panel.menu.add', compact('menuTree', 'pages'));
+        $staff = StaffGroup::where('is_active', true)->orderBy('order')->get();
+        $project = ProjectCategory::where('is_active', true)->orderBy('order')->get();
+        return view('panel.menu.add', compact('menuTree', 'pages', 'staff', 'project'));
     }
 
     public function store(MenuCreateRequest $request)
@@ -102,6 +106,7 @@ class MainMenuController extends Controller
         try {
             MainMenu::create([
                 'name' => $request->name,
+                'menu_type' => $request->menu_type,
                 'url' => $request->url,
                 'order' => (int)$request->order,
                 'parent_id' => (int) $request->parent_id == -1 ? null : (int) $request->parent_id,
@@ -125,7 +130,9 @@ class MainMenuController extends Controller
             ->get();
         $menuTree = $this->buildMenuTree($menus, 0, $menu->id);
         $pages = Page::with('translations')->where('is_active', true)->orderBy('order')->get();
-        return view('panel.menu.edit', compact('menu', 'menuTree', 'pages'));
+        $staff = StaffGroup::where('is_active', true)->orderBy('order')->get();
+        $project = ProjectCategory::where('is_active', true)->orderBy('order')->get();
+        return view('panel.menu.edit', compact('menu', 'menuTree', 'pages', 'staff', 'project'));
     }
 
     public function update(MenuCreateRequest $request, $id)

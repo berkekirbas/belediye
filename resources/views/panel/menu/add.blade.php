@@ -43,16 +43,19 @@
                         <option value="0">Diğer (Manuel Link Ekle)</option>
                         <option value="/">Anasayfa</option>
                         <optgroup label="Sayfalarım">
-                            <option value="/sayfa">Sayfalar</option>
-                        </optgroup>
-                        <optgroup label="Hizmetlerim">
-                            <option value="hizmet/icme-su-isleri.html">İçme Su İşleri</option>
+                            @foreach ($pages as $page)
+                                <option value="/sayfa/{{ $page->translation()->slug }}">{{ $page->translation()->title }}</option>
+                            @endforeach
                         </optgroup>
                         <optgroup label="Kurumsal Yapı">
-                            <option value="kurumsal-yapi/belediye-personeli.html">Belediye Personeli</option>
+                            @foreach ($staff as $staffGroup)
+                                <option value="/kurumsal-yapi/{{ $staffGroup->slug }}">{{ $staffGroup->name }}</option>
+                            @endforeach
                         </optgroup>
                         <optgroup label="Proje Kategori">
-                            <option value="kategori/devam-eden-projelerimiz.html">Devam Eden Projelerimiz</option>
+                            @foreach ($project as $category)
+                                <option value="/kategori/{{ $category->slug }}">{{ $category->name }}</option>
+                            @endforeach
                         </optgroup>
                         <optgroup label="Sabit Sayfalar">
                             <option value="/foto-galeri">Foto Galeri</option>
@@ -63,7 +66,6 @@
                             <option value="/iletisim">İletişim</option>
                         </optgroup>
                     </select>
-                    <span class="text-danger">{{ $errors->first('menu_type') }}</span>
                 </div>
 
                 <div id="menuUrldiv" class="form-group mb-3">

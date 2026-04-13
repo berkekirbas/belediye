@@ -15,8 +15,6 @@ class MenuCreateRequest extends FormRequest
             'order' => ['required', 'integer', 'min:0'],
             'open_type' => ['required', 'in:_self,_blank'],
             'is_active' => ['nullable', 'boolean'],
-            'menu_type' => ['required', 'in:dropdown,link'],
-
         ];
     }
 
@@ -35,8 +33,6 @@ class MenuCreateRequest extends FormRequest
             'open_type.required' => 'Menü açılma türü zorunludur.',
             'open_type.in' => 'Menü açılma türü _self veya _blank olmalıdır.',
             'is_active.boolean' => 'Menü aktiflik durumu true veya false olmalıdır.',
-            'menu_type.required' => 'Menü türü zorunludur.',
-            'menu_type.in' => 'Menü türü dropdown veya link olmalıdır.',
         ];
     }
 }
