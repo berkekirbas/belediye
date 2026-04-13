@@ -43,15 +43,7 @@
 
     @include('front.partial.navbar')
 
-    @include('front.partial.slider')
-
-    @include('front.partial.duyuru')
-
-    @include('front.partial.proje')
-
-    @include('front.partial.etkinlik')
-
-    @include('front.partial.iletisim_form')
+    @yield('content')
 
     @include('front.partial.footer')
 

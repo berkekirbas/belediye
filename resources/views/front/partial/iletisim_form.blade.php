@@ -45,24 +45,21 @@
                     </div>
                 </form>
             </div>
-            @php
-               $taziyeler = \App\Models\Condolence::where('is_active', true)->get();
-            @endphp
             <div class="col-md-4">
                 <h4>Başkanın Mesajları</h4>
                 <h6>Taziye ve Başsağlığı Mesajları</h6>
 
                 <div class="swiper7 taziye-back" style="overflow: hidden;">
                     <div class="swiper-wrapper ">
-                        @foreach($taziyeler as $taziye)
-                        <div class="swiper-slide">
-                            <p class="taziye-text"><a href="#">{{ $taziye->message }}</a></p>
-                            <h5>{{ $taziye->fullname }}</h5>
-                            <p>{{ $taziye->job }}</p>
-                            <img style="border-radius: 100%;width: 90px;height: 90px;background: #fff;"
-                                src="/storage/settings/{{ $settings->favicon }}" class="img-fluid"
-                                alt="{{ $settings->title }}">
-                        </div>
+                        @foreach ($taziyeler as $taziye)
+                            <div class="swiper-slide">
+                                <p class="taziye-text"><a href="#">{{ $taziye->message }}</a></p>
+                                <h5>{{ $taziye->fullname }}</h5>
+                                <p>{{ $taziye->job }}</p>
+                                <img style="border-radius: 100%;width: 90px;height: 90px;background: #fff;"
+                                    src="/storage/settings/{{ $settings->favicon }}" class="img-fluid"
+                                    alt="{{ $settings->title }}">
+                            </div>
                         @endforeach
                     </div>
                     <div class="swiper-pagination taziye-pagination"></div>

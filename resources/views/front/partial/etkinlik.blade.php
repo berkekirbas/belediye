@@ -1,18 +1,3 @@
-@php
-    $etkinlik = \App\Models\Activity::with([
-        'activity_translations:id,activity_id,title,start_date,end_date,content,location',
-    ])
-        ->where('is_active', true)
-        ->orderBy('order')
-        ->get();
-
-    $galeriler = \App\Models\PhotoGallery::with(['photo_gallery_translations:id,photo_gallery_id,title,slug'])
-        ->where('is_active', true)
-        ->orderBy('order')
-        ->get();
-@endphp
-
-
 <section class="section second">
     <div class="container">
         <div class="leftArea">

@@ -1,9 +1,3 @@
-@php
-
-    $haberler = \App\Models\News::where('is_active', true)->orderBy('order')->get();
-
-@endphp
-
 <!-- Insert to your webpage where you want to display the slider -->
 <div id="amazingslider-wrapper-1"
     style="display:block;position:relative;max-width:100%;margin-top: -15px;    margin-bottom: 15px;">

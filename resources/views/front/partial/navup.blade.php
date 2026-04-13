@@ -4,8 +4,8 @@
              <div class="col-md-4 col-xs-12">
                  <div class="row pt-50 mobil_alan">
                      <div class="h_contact-links">
-                         <a href="tel:{{ $settings->phone }}" class="call-center"><i
-                                 class="fa fa-phone" aria-hidden="true"></i>
+                         <a href="tel:{{ $settings->phone }}" class="call-center"><i class="fa fa-phone"
+                                 aria-hidden="true"></i>
                              {{ $settings->phone }}</a>
 
                          <a href="/iletisim">İletişim</a>
@@ -15,7 +15,7 @@
              <div class="col-md-4 col-xs-12">
                  <div class="row">
                      <div class="col-md-12 t-center logo_webofisi">
-                         <a href="/"><img src="storage/settings/{{ $settings->logo }}"
+                         <a href="/"><img src="/storage/settings/{{ $settings->logo }}"
                                  alt="{{ $settings->title ?? 'T.C. Büyükmandıra Belediyesi' }}">
                      </div>
                  </div>
@@ -27,7 +27,7 @@
 
                              <a href="javascript:;" class="dildegis" data-id="1">
                                  <strong class='active'> <img
-                                         src="assets/tema/belediye/uploads/diller/kucuk/if_Turkey_298423.png"
+                                         src="/assets/tema/belediye/uploads/diller/kucuk/if_Turkey_298423.png"
                                          style="max-width: 23px;margin-top: -5px;">
                                      Türkçe </strong> </a><span style="font-size:20px;"> | </span>
                              <a href="javascript:;" class="dildegis" data-id="24">

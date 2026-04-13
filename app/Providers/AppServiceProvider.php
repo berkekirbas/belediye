@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::composer('front.layout.app', function ($view) {
+        View::composer('front.*', function ($view) {
             $view->with('settings', Settings::first());
             $view->with('main_menu', MainMenu::with('children')->whereNull('parent_id')->get());
             $view->with('footer_menu', FooterMenu::with('children')->whereNull('parent_id')->get());

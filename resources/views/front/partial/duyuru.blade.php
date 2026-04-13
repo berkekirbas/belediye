@@ -1,8 +1,3 @@
-@php
-
-    $duyurular = \App\Models\Notice::where('is_active', true)->orderBy('order')->get();
-
-@endphp
 <div class="haberler d-none d-lg-block">
     <div class="container">
         <div class="row">
@@ -18,10 +13,9 @@
                 <div class="swiper-container swiper2" style="position: absolute;">
                     <div class="swiper-wrapper">
                         @foreach ($duyurular as $duyuru)
-
-                        <div class="swiper-slide news2">
-                            <a href="duyuru/#">{{ $duyuru->notice_translation()->title }}</a>
-                        </div>
+                            <div class="swiper-slide news2">
+                                <a href="duyuru/#">{{ $duyuru->notice_translation()->title }}</a>
+                            </div>
                         @endforeach
                     </div>
                     <!-- If we need navigation buttons -->

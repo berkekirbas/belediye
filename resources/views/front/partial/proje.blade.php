@@ -1,8 +1,3 @@
-@php
-
-    $projeler = \App\Models\Project::where('is_active', true)->orderBy('order')->get();
-
-@endphp
 <section class="anasayfa-son-proje">
     <div class="recentProjects">
         <div class="container">
@@ -25,19 +20,20 @@
                 <div class="rightArea recentProjectSliding">
                     <div id="owl-demo2" class="owl-carousel">
                         @foreach ($projeler as $proje)
-                        <div class="item">
-                            <a href="proje/{{ $proje->project_translation()->slug }}.html">
-                                <div class="photo">
-                                    <div class="photoContent">
-                                        <img src="/storage/projects/{{ $proje->image }}" alt="{{ $proje->project_translation()->title }}">
+                            <div class="item">
+                                <a href="proje/{{ $proje->project_translation()->slug }}.html">
+                                    <div class="photo">
+                                        <div class="photoContent">
+                                            <img src="/storage/projects/{{ $proje->image }}"
+                                                alt="{{ $proje->project_translation()->title }}">
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="description">
-                                    <h3 class="title">{{ $proje->project_translation()->title }}</h3>
-                                </div>
-                            </a>
-                        </div>
+                                    <div class="description">
+                                        <h3 class="title">{{ $proje->project_translation()->title }}</h3>
+                                    </div>
+                                </a>
+                            </div>
                         @endforeach
                     </div>
 
