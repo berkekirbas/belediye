@@ -21,7 +21,7 @@
                     <div id="owl-demo2" class="owl-carousel">
                         @foreach ($projeler as $proje)
                             <div class="item">
-                                <a href="proje/{{ $proje->project_translation()->slug }}.html">
+                                <a href="/proje/{{ $proje->project_translation()->slug }}">
                                     <div class="photo">
                                         <div class="photoContent">
                                             <img src="/storage/projects/{{ $proje->image }}"
