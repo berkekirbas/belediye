@@ -20,7 +20,6 @@ class QuickMenu extends Model
         'order',
         'is_active',
         'open_type',
-        'page_id',
     ];
 
     public function page()

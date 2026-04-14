@@ -98,7 +98,7 @@
 
                 <div class="form-group mb-3">
                     <label class="form-label">Menü Aktif mi?</label>
-                    <input type="checkbox" class="form-check-input" name="is_active" value="1"
+                    <input checked type="checkbox" class="form-check-input" name="is_active" value="1"
                         {{ old('is_active') ? 'checked' : '' }}>
                     <span class="text-danger">{{ $errors->first('is_active') }}</span>
                 </div>

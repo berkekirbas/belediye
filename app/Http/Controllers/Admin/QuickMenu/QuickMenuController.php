@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\QuickMenuCreateRequest;
 use App\Models\QuickMenu;
 use App\Models\Page;
+use App\Models\PhotoGallery;
+use App\Models\StaffGroup;
+use App\Models\ProjectCategory;
 use Illuminate\Http\Request;
 
 
@@ -39,7 +42,10 @@ class QuickMenuController extends Controller
     public function add()
     {
         $pages = Page::with('translations')->where('is_active', true)->orderBy('order')->get();
-        return view('panel.quickmenu.add', compact('pages'));
+        $staff = StaffGroup::where('is_active', true)->orderBy('order')->get();
+        $project = ProjectCategory::where('is_active', true)->orderBy('order')->get();
+        $photo_gallery = PhotoGallery::with('photo_gallery_translations')->where('is_active', true)->orderBy('order')->get();
+        return view('panel.quickmenu.add', compact('pages', 'staff', 'project', 'photo_gallery'));
     }
 
     public function store(QuickMenuCreateRequest $request)
@@ -51,7 +57,6 @@ class QuickMenuController extends Controller
                 'order' => (int)$request->order,
                 'open_type' => $request->open_type,
                 'is_active' => $request->has('is_active') ? 1 : 0,
-                'page_id' => $request->page_id ?: null,
             ]);
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->withErrors(['error' => 'Hızlı Menü oluşturulurken bir hata oluştu: ' . $e->getMessage()]);
@@ -65,7 +70,10 @@ class QuickMenuController extends Controller
         $menu = QuickMenu::findOrFail($id);
 
         $pages = Page::with('translations')->where('is_active', true)->orderBy('order')->get();
-        return view('panel.quickmenu.edit', compact('menu', 'pages'));
+        $staff = StaffGroup::where('is_active', true)->orderBy('order')->get();
+        $project = ProjectCategory::where('is_active', true)->orderBy('order')->get();
+        $photo_gallery = PhotoGallery::with('photo_gallery_translations')->where('is_active', true)->orderBy('order')->get();
+        return view('panel.quickmenu.edit', compact('menu', 'pages', 'staff', 'project', 'photo_gallery'));
     }
 
     public function update(QuickMenuCreateRequest $request, $id)
