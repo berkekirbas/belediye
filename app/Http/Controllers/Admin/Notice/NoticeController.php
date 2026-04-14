@@ -87,6 +87,7 @@ class NoticeController extends Controller
             $notice->notice_translations()->create([
                 'language_code' => 'tr',
                 'title' => $request->title,
+                'slug' => Str::slug($request->title),
                 'content' => $request->content,
                 'meta_keywords' => $request->meta_keywords,
                 'meta_description' => $request->meta_description,
@@ -131,6 +132,7 @@ class NoticeController extends Controller
             if ($translation) {
                 $translation->update([
                     'title' => $request->title,
+                    'slug' => Str::slug($request->title),
                     'content' => $request->content,
                     'meta_keywords' => $request->meta_keywords,
                     'meta_description' => $request->meta_description,
@@ -139,6 +141,7 @@ class NoticeController extends Controller
                 $notice->notice_translations()->create([
                     'language_code' => 'tr',
                     'title' => $request->title,
+                    'slug' => Str::slug($request->title),
                     'content' => $request->content,
                     'meta_keywords' => $request->meta_keywords,
                     'meta_description' => $request->meta_description,

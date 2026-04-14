@@ -13,10 +13,10 @@ class ActivityUpdateRequest extends FormRequest
 
         return [
             'title' => ['required', 'string', 'max:255'],
-            'location' => ['required', 'string', 'max:255'],
+            'location' => ['nullable', 'string', 'max:255'],
             'content' => ['required', 'string'],
             'start_date' => ['required', 'date'],
-            'end_date' => ['required', 'date', 'after_or_equal:start_date'],
+            'end_date' => ['nullable', 'date', 'after_or_equal:start_date'],
             'meta_keywords' => ['nullable', 'string', 'max:255'],
             'meta_description' => ['nullable', 'string', 'max:500'],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,webp,gif', 'max:2048'],

@@ -25,8 +25,8 @@ class AppServiceProvider extends ServiceProvider
     {
         View::composer('front.*', function ($view) {
             $view->with('settings', Settings::first());
-            $view->with('main_menu', MainMenu::with('children')->whereNull('parent_id')->get());
-            $view->with('footer_menu', FooterMenu::with('children')->whereNull('parent_id')->get());
+            $view->with('main_menu', MainMenu::with('children')->whereNull('parent_id')->orderBy('order')->get());
+            $view->with('footer_menu', FooterMenu::with('children')->whereNull('parent_id')->orderBy('order')->get());
         });
     }
 }

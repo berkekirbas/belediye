@@ -70,21 +70,21 @@
                                         <div class="more-menu">
                                             <ul>
                                                 <li>
-                                                    <a class="link" href="#">
+                                                    <a class="link" href="/sayfa/baskanin-ozgecmisi">
                                                         <span class="hover-icon">
                                                             <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                                                         </span>
                                                         Başkanın Özgeçmişi </a>
                                                 </li>
                                                 <li>
-                                                    <a class="link" href="#">
+                                                    <a class="link" href="/sayfa/baskanin-mesaji">
                                                         <span class="hover-icon">
                                                             <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                                                         </span>
                                                         Başkanın Mesajı </a>
                                                 </li>
                                                 <li>
-                                                    <a class="link" href="#">
+                                                    <a class="link" href="/foto/baskan-album">
                                                         <span class="hover-icon">
                                                             <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                                                         </span>

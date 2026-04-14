@@ -51,7 +51,7 @@
                                         <th scope="row"></th>
                                         <td>
                                             <a
-                                                href="etkinlik/${translation.slug}"
+                                                href="/etkinlik/${translation.slug}"
                                                 title="${translation.title}"
                                             >
                                                 <i class="fa fa-external-link-square"> </i>
@@ -103,7 +103,7 @@
                         <div id="owl" class="owl-carousel">
                             @foreach ($galeriler as $galeri)
                                 <div class="item">
-                                    <a href="{{ url('foto-galeri/' . $galeri->photo_gallery_translations[0]->slug) }}">
+                                    <a href="{{ url('/foto/' . $galeri->photo_gallery_translations[0]->slug) }}">
                                         <div class="photo">
                                             <div class="photoContent">
                                                 <img src="/storage/photo-galleries/{{ $galeri->image }}"

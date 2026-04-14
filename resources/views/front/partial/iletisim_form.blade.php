@@ -34,7 +34,7 @@
                             <input class="form-control" type="text" name="captcha" required>
                         </div>
 
-                        <input type="hidden" id="url" name="url" value="/index.html">
+                        <input type="hidden" id="url" name="url" value="/">
 
                         <div class="col-md-12 t-center mt-30">
                             <button style="width: 185px;margin-top: 0px;" type="submit" name="IletisimBtn"
@@ -53,7 +53,7 @@
                     <div class="swiper-wrapper ">
                         @foreach ($taziyeler as $taziye)
                             <div class="swiper-slide">
-                                <p class="taziye-text"><a href="#">{{ $taziye->message }}</a></p>
+                                <p class="taziye-text"><a href="/mesaj/{{ $taziye->slug }}">{{ $taziye->message }}</a></p>
                                 <h5>{{ $taziye->fullname }}</h5>
                                 <p>{{ $taziye->job }}</p>
                                 <img style="border-radius: 100%;width: 90px;height: 90px;background: #fff;"

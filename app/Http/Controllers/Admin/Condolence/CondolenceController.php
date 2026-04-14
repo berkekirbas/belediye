@@ -65,7 +65,7 @@ class CondolenceController extends Controller
         return view('panel.condolence.edit', compact('condolence'));
     }
 
-    public function update(CondolenceCreateRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $condolence = Condolence::findOrFail($id);
 

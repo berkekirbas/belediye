@@ -12,6 +12,7 @@ class NoticeTranslation extends Model
         'notice_id',
         'language_code',
         'title',
+        'slug',
         'content',
         'meta_keywords',
         'meta_description',
