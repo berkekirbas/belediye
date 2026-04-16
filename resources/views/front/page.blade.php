@@ -6,7 +6,6 @@
             <div class="row">
 
                 @switch($page_type)
-
                     @case('sayfa')
                         <div class="innerPageHeading">
                             <a class="active" href="/">Anasayfa</a> / {{ $page->translation()->title }}
@@ -65,7 +64,8 @@
                                                     @foreach ($staffGroup->staffs as $staff)
                                                         <li style="transition: height 350ms; height: 351px;" class="">
                                                             <a href="" data-largesrc="/storage/staff/{{ $staff->image }}"
-                                                                data-title="{{ $staff->full_name }}" data-pozisyon="{{ $staff->title }}"
+                                                                data-title="{{ $staff->full_name }}"
+                                                                data-pozisyon="{{ $staff->title }}"
                                                                 data-social="
                                                                     <a target='_blank' href='{{ $staff->facebook_url }}'><i class='fa fa-facebook'></i></a>
                                                                     <a target='_blank' href='{{ $staff->twitter_url }}'><i class='fa fa-twitter'></i></a>
@@ -114,21 +114,23 @@
                                         <div id="webofisiLoad" class="innerPageNews innerPageProjects">
                                             <ul>
                                                 @foreach ($projectCategory->projects as $project)
-                                                <li>
-                                                    <a href="/proje/{{  $project->project_translation()->slug }}">
-                                                        <div class="photo">
-                                                            <img src="/storage/projects/{{ $project->image }}" alt="{{ $project->project_translation()->title }}">
-                                                        </div>
-                                                        <div class="overlay">
-                                                            <div class="content">
-                                                                <h3><i class="icon fa fa-search-plus"></i><br>Proje Detayı...</h3>
+                                                    <li>
+                                                        <a href="/proje/{{ $project->project_translation()->slug }}">
+                                                            <div class="photo">
+                                                                <img src="/storage/projects/{{ $project->image }}"
+                                                                    alt="{{ $project->project_translation()->title }}">
                                                             </div>
+                                                            <div class="overlay">
+                                                                <div class="content">
+                                                                    <h3><i class="icon fa fa-search-plus"></i><br>Proje Detayı...
+                                                                    </h3>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <div class="comment">
+                                                            <h3 class="title">{{ $project->project_translation()->title }}</h3>
                                                         </div>
-                                                    </a>
-                                                    <div class="comment">
-                                                        <h3 class="title">{{ $project->project_translation()->title }}</h3>
-                                                    </div>
-                                                </li>
+                                                    </li>
                                                 @endforeach
 
                                             </ul>
@@ -159,7 +161,8 @@
                                         </div>
                                         <div class="innerPageNewsDetail">
                                             <div class="post-img">
-                                                <img src="/storage/projects/{{ $project->project->image }}" alt="{{ $project->title }}" class="img-responsive">
+                                                <img src="/storage/projects/{{ $project->project->image }}"
+                                                    alt="{{ $project->title }}" class="img-responsive">
                                             </div>
                                             <div class="post-meta">
                                                 <span class="meta-date">{{ $project->created_at }}</span>
@@ -167,22 +170,28 @@
                                             <p>{!! $project->content !!}</p>
 
                                             <div class="otherNews">
-                                                <div class="title"><h3>Proje Fotoğrafları</h3></div>
+                                                <div class="title">
+                                                    <h3>Proje Fotoğrafları</h3>
+                                                </div>
                                             </div>
                                             <div class="innerGalleryDetail">
                                                 <ul>
                                                     @foreach ($project->project->images as $image)
-                                                    <li>
-                                                        <a class="grouped_elements" rel="group1" href="/storage/project-images/{{ $image->image }}" title="{{ $project->title }}">
-                                                            <div class="photo">
-                                                                <img src="/storage/project-images/{{ $image->image }}" alt="{{ $project->title }}"></div>
-                                                            <div class="figure">
-                                                                <div class="content">
-                                                                    <i class="icon fa fa-search-plus"></i>
+                                                        <li>
+                                                            <a class="grouped_elements" rel="group1"
+                                                                href="/storage/project-images/{{ $image->image }}"
+                                                                title="{{ $project->title }}">
+                                                                <div class="photo">
+                                                                    <img src="/storage/project-images/{{ $image->image }}"
+                                                                        alt="{{ $project->title }}">
                                                                 </div>
-                                                            </div>
-                                                        </a>
-                                                    </li>
+                                                                <div class="figure">
+                                                                    <div class="content">
+                                                                        <i class="icon fa fa-search-plus"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
                                                     @endforeach
                                                 </ul>
                                             </div>
@@ -213,7 +222,8 @@
                                         </div>
                                         <div class="innerPageNewsDetail">
                                             <div class="post-img">
-                                                <img src="/storage/news/{{ $new->news->image }}" alt="{{ $new->title }}" class="img-responsive">
+                                                <img src="/storage/news/{{ $new->news->image }}" alt="{{ $new->title }}"
+                                                    class="img-responsive">
                                             </div>
                                             <div class="post-meta">
                                                 <span class="meta-date">{{ $new->created_at }}</span>
@@ -221,22 +231,28 @@
                                             <p>{!! $new->content !!}</p>
 
                                             <div class="otherNews">
-                                                <div class="title"><h3>Haber Fotoğrafları</h3></div>
+                                                <div class="title">
+                                                    <h3>Haber Fotoğrafları</h3>
+                                                </div>
                                             </div>
                                             <div class="innerGalleryDetail">
                                                 <ul>
                                                     @foreach ($new->news->images as $image)
-                                                    <li>
-                                                        <a class="grouped_elements" rel="group1" href="/storage/news-images/{{ $image->image }}" title="{{ $new->title }}">
-                                                            <div class="photo">
-                                                                <img src="/storage/news-images/{{ $image->image }}" alt="{{ $new->title }}"></div>
-                                                            <div class="figure">
-                                                                <div class="content">
-                                                                    <i class="icon fa fa-search-plus"></i>
+                                                        <li>
+                                                            <a class="grouped_elements" rel="group1"
+                                                                href="/storage/news-images/{{ $image->image }}"
+                                                                title="{{ $new->title }}">
+                                                                <div class="photo">
+                                                                    <img src="/storage/news-images/{{ $image->image }}"
+                                                                        alt="{{ $new->title }}">
                                                                 </div>
-                                                            </div>
-                                                        </a>
-                                                    </li>
+                                                                <div class="figure">
+                                                                    <div class="content">
+                                                                        <i class="icon fa fa-search-plus"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
                                                     @endforeach
                                                 </ul>
                                             </div>
@@ -270,18 +286,20 @@
                                             <div id="cziaLoad" class="innerGallery">
                                                 <ul>
                                                     @foreach ($galleries as $gallery)
-                                                    <li>
-                                                        <a href="/foto/{{ $gallery->photo_gallery_translation()->slug }}">
-                                                            <div class="photo">
-                                                                <img src="/storage/photo-galleries/{{ $gallery->image }}" alt="{{ $gallery->photo_gallery_translation()->title }}">
-                                                            </div>
-                                                            <div class="comment">
-                                                                <div class="content">
-                                                                    <h3 class="title">{{ $gallery->photo_gallery_translation()->title }}</h3>
+                                                        <li>
+                                                            <a href="/foto/{{ $gallery->photo_gallery_translation()->slug }}">
+                                                                <div class="photo">
+                                                                    <img src="/storage/photo-galleries/{{ $gallery->image }}"
+                                                                        alt="{{ $gallery->photo_gallery_translation()->title }}">
                                                                 </div>
-                                                            </div>
-                                                        </a>
-                                                    </li>
+                                                                <div class="comment">
+                                                                    <div class="content">
+                                                                        <h3 class="title">
+                                                                            {{ $gallery->photo_gallery_translation()->title }}</h3>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
                                                     @endforeach
                                                 </ul>
                                             </div>
@@ -315,25 +333,50 @@
                                             <p>{!! $gallery->content !!}</p>
                                             <div class="innerGalleryDetail">
                                                 <ul>
-                                                    @foreach ($gallery->photo_gallery->images as $image)
-                                                    <li>
-                                                        <a class="grouped_elements" rel="group2" href="/storage/photo-gallery-images/{{ $image->image }}" title="{{ $gallery->title }}">
-                                                            <div class="photo">
-                                                                <img src="/storage/photo-gallery-images/{{ $image->image }}" alt="{{ $gallery->title }}">
-                                                            </div>
-                                                            <div class="figure">
-                                                                <div class="content">
-                                                                    <i class="icon fa fa-search-plus"></i>
+                                                    @foreach ($images as $image)
+                                                        <li>
+                                                            <a class="grouped_elements" rel="group2"
+                                                                href="/storage/photo-gallery-images/{{ $image->image }}"
+                                                                title="{{ $gallery->title }}">
+                                                                <div class="photo">
+                                                                    <img src="/storage/photo-gallery-images/{{ $image->image }}"
+                                                                        alt="{{ $gallery->title }}">
                                                                 </div>
-                                                            </div>
-                                                        </a>
-                                                    </li>
+                                                                <div class="figure">
+                                                                    <div class="content">
+                                                                        <i class="icon fa fa-search-plus"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
                                                     @endforeach
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="temizle"></div>
+                                    <div class="text-center">
+                                        <div class="st-pagination">
+                                            @if ($images->hasPages())
+                                                <ul class="pagination">
+                                                    <li><a href="{{ $images->previousPageUrl() }}">«</a></li>
+
+                                                    @foreach ($images->getUrlRange(1, $images->lastPage()) as $page => $url)
+                                                        @if ($page == $images->currentPage())
+                                                            <li class="active"><a
+                                                                    href="{{ $url }}">{{ $page }}</a></li>
+                                                        @else
+                                                            <li><a href="{{ $url }}">{{ $page }}</a></li>
+                                                        @endif
+                                                    @endforeach
+
+                                                    <li><a href="{{ $images->nextPageUrl() }}">»</a></li>
+                                                </ul>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                     @break
@@ -359,41 +402,57 @@
 
                                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                                             <li class="nav-item">
-                                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Tüm Etkinlikler</a>
+                                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home"
+                                                    role="tab" aria-controls="home" aria-selected="true">Tüm Etkinlikler</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Geçmiş Etkinlikler</a>
+                                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile"
+                                                    role="tab" aria-controls="profile" aria-selected="false">Geçmiş
+                                                    Etkinlikler</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Gelecek Etkinlikler</a>
+                                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact"
+                                                    role="tab" aria-controls="contact" aria-selected="false">Gelecek
+                                                    Etkinlikler</a>
                                             </li>
                                         </ul>
 
                                         <div class="tab-content" id="myTabContent">
-                                            <div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                            <div class="tab-pane fade active show" id="home" role="tabpanel"
+                                                aria-labelledby="home-tab">
                                                 <div class="innerPageNewsDetail width-103 mt-10">
                                                     @foreach ($allActivities as $activity)
-                                                    @php
-                                                        $date = \Carbon\Carbon::parse($activity->activity_translation()->start_date);
-                                                    @endphp
+                                                        @php
+                                                            $date = \Carbon\Carbon::parse(
+                                                                $activity->activity_translation()->start_date,
+                                                            );
+                                                        @endphp
                                                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 fadeIn wow">
-                                                            <a href="/etkinlik/{{ $activity->activity_translation()->slug }}" class="ewent_list">
+                                                            <a href="/etkinlik/{{ $activity->activity_translation()->slug }}"
+                                                                class="ewent_list">
                                                                 <div class="date custom3">
                                                                     <div class="day">{{ $date->format('d') }}</div>
                                                                     <section>{{ $date->translatedFormat('F') }}<br>
-                                                                        <span class="year">{{ $date->translatedFormat('l') }}<br>
-                                                                        <span class="year">{{ $date->format('Y') }}</span></span></section>
+                                                                        <span
+                                                                            class="year">{{ $date->translatedFormat('l') }}<br>
+                                                                            <span
+                                                                                class="year">{{ $date->format('Y') }}</span></span>
+                                                                    </section>
                                                                 </div>
                                                                 <div class="clearfix"></div>
                                                                 <hr class="hr custom3">
                                                                 <hr class="hr custom8">
                                                                 <div class="times custom1">
-                                                                    <i class="fa fa-map-marker icon marker2" aria-hidden="true"></i>
-                                                                    <p class="ellips tt" data-ellip="1;1;1;1;">{{ $activity->activity_translation()->location }}</p>
+                                                                    <i class="fa fa-map-marker icon marker2"
+                                                                        aria-hidden="true"></i>
+                                                                    <p class="ellips tt" data-ellip="1;1;1;1;">
+                                                                        {{ $activity->activity_translation()->location }}</p>
                                                                 </div>
                                                                 <hr class="hr custom3">
                                                                 <div class="heads">
-                                                                    <h5 class="head custom8 ellips uppercase tleft" data-ellip="2;2;2;2;">{{ $activity->activity_translation()->title }}</h5>
+                                                                    <h5 class="head custom8 ellips uppercase tleft"
+                                                                        data-ellip="2;2;2;2;">
+                                                                        {{ $activity->activity_translation()->title }}</h5>
                                                                 </div>
                                                                 <div class="clearfix"></div>
                                                             </a>
@@ -402,30 +461,41 @@
                                                 </div>
                                             </div>
 
-                                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                            <div class="tab-pane fade" id="profile" role="tabpanel"
+                                                aria-labelledby="profile-tab">
                                                 <div class="innerPageNewsDetail width-103 mt-10">
                                                     @foreach ($pastActivities as $activity)
-                                                    @php
-                                                        $date = \Carbon\Carbon::parse($activity->activity_translation()->start_date);
-                                                    @endphp
+                                                        @php
+                                                            $date = \Carbon\Carbon::parse(
+                                                                $activity->activity_translation()->start_date,
+                                                            );
+                                                        @endphp
                                                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 fadeIn wow">
-                                                            <a href="/etkinlik/{{ $activity->activity_translation()->slug }}" class="ewent_list">
+                                                            <a href="/etkinlik/{{ $activity->activity_translation()->slug }}"
+                                                                class="ewent_list">
                                                                 <div class="date custom3">
                                                                     <div class="day">{{ $date->format('d') }}</div>
                                                                     <section>{{ $date->translatedFormat('F') }}<br>
-                                                                        <span class="year">{{ $date->translatedFormat('l') }}<br>
-                                                                        <span class="year">{{ $date->format('Y') }}</span></span></section>
+                                                                        <span
+                                                                            class="year">{{ $date->translatedFormat('l') }}<br>
+                                                                            <span
+                                                                                class="year">{{ $date->format('Y') }}</span></span>
+                                                                    </section>
                                                                 </div>
                                                                 <div class="clearfix"></div>
                                                                 <hr class="hr custom3">
                                                                 <hr class="hr custom8">
                                                                 <div class="times custom1">
-                                                                    <i class="fa fa-map-marker icon marker2" aria-hidden="true"></i>
-                                                                    <p class="ellips tt" data-ellip="1;1;1;1;">{{ $activity->activity_translation()->location }}</p>
+                                                                    <i class="fa fa-map-marker icon marker2"
+                                                                        aria-hidden="true"></i>
+                                                                    <p class="ellips tt" data-ellip="1;1;1;1;">
+                                                                        {{ $activity->activity_translation()->location }}</p>
                                                                 </div>
                                                                 <hr class="hr custom3">
                                                                 <div class="heads">
-                                                                    <h5 class="head custom8 ellips uppercase tleft" data-ellip="2;2;2;2;">{{ $activity->activity_translation()->title }}</h5>
+                                                                    <h5 class="head custom8 ellips uppercase tleft"
+                                                                        data-ellip="2;2;2;2;">
+                                                                        {{ $activity->activity_translation()->title }}</h5>
                                                                 </div>
                                                                 <div class="clearfix"></div>
                                                             </a>
@@ -434,30 +504,41 @@
                                                 </div>
                                             </div>
 
-                                            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                            <div class="tab-pane fade" id="contact" role="tabpanel"
+                                                aria-labelledby="contact-tab">
                                                 <div class="innerPageNewsDetail width-103 mt-10">
                                                     @foreach ($futureActivities as $activity)
-                                                    @php
-                                                        $date = \Carbon\Carbon::parse($activity->activity_translation()->start_date);
-                                                    @endphp
+                                                        @php
+                                                            $date = \Carbon\Carbon::parse(
+                                                                $activity->activity_translation()->start_date,
+                                                            );
+                                                        @endphp
                                                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 fadeIn wow">
-                                                            <a href="/etkinlik/{{ $activity->activity_translation()->slug }}" class="ewent_list">
+                                                            <a href="/etkinlik/{{ $activity->activity_translation()->slug }}"
+                                                                class="ewent_list">
                                                                 <div class="date custom3">
                                                                     <div class="day">{{ $date->format('d') }}</div>
                                                                     <section>{{ $date->translatedFormat('F') }}<br>
-                                                                        <span class="year">{{ $date->translatedFormat('l') }}<br>
-                                                                        <span class="year">{{ $date->format('Y') }}</span></span></section>
+                                                                        <span
+                                                                            class="year">{{ $date->translatedFormat('l') }}<br>
+                                                                            <span
+                                                                                class="year">{{ $date->format('Y') }}</span></span>
+                                                                    </section>
                                                                 </div>
                                                                 <div class="clearfix"></div>
                                                                 <hr class="hr custom3">
                                                                 <hr class="hr custom8">
                                                                 <div class="times custom1">
-                                                                    <i class="fa fa-map-marker icon marker2" aria-hidden="true"></i>
-                                                                    <p class="ellips tt" data-ellip="1;1;1;1;">{{ $activity->activity_translation()->location }}</p>
+                                                                    <i class="fa fa-map-marker icon marker2"
+                                                                        aria-hidden="true"></i>
+                                                                    <p class="ellips tt" data-ellip="1;1;1;1;">
+                                                                        {{ $activity->activity_translation()->location }}</p>
                                                                 </div>
                                                                 <hr class="hr custom3">
                                                                 <div class="heads">
-                                                                    <h5 class="head custom8 ellips uppercase tleft" data-ellip="2;2;2;2;">{{ $activity->activity_translation()->title }}</h5>
+                                                                    <h5 class="head custom8 ellips uppercase tleft"
+                                                                        data-ellip="2;2;2;2;">
+                                                                        {{ $activity->activity_translation()->title }}</h5>
                                                                 </div>
                                                                 <div class="clearfix"></div>
                                                             </a>
@@ -492,37 +573,41 @@
                                             <h3>{{ $activity->title }}</h3>
                                         </div>
 
-                                            <div class="innerPageNewsDetail">
-                                                <div class="post-img">
-                                                    <img src="/storage/activity/{{ $activity->activity->image }}" alt="{{ $activity->title }}" class="img-responsive">
-                                                </div>
-                                                <table class="table table-hover etkdetay">
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row"><i class="fa fa-bookmark fagns"></i> Etkinlik</th>
-                                                            <td>{{ $activity->title }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row"><i class="fa fa-calendar fagns"></i> Başlama Tarihi</th>
-                                                            <td>{{ \Carbon\Carbon::parse($activity->start_date)->translatedFormat('d.F.Y') }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row"><i class="fa fa-calendar-o fagns"></i> Bitiş Tarihi</th>
-                                                            <td>{{ $activity->end_date
-                                                                ? \Carbon\Carbon::parse($activity->end_date)->translatedFormat('d.F.Y')
-                                                                : 'Belirtilmemiş' }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row"><i class="fa fa-map-marker fagns"></i> Yer</th>
-                                                            <td>{{ $activity->location }}</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                <div class="icerik">
-                                                    <p>{!! $activity->content !!}</p>
-                                                </div>
+                                        <div class="innerPageNewsDetail">
+                                            <div class="post-img">
+                                                <img src="/storage/activity/{{ $activity->activity->image }}"
+                                                    alt="{{ $activity->title }}" class="img-responsive">
                                             </div>
+                                            <table class="table table-hover etkdetay">
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row"><i class="fa fa-bookmark fagns"></i> Etkinlik</th>
+                                                        <td>{{ $activity->title }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row"><i class="fa fa-calendar fagns"></i> Başlama Tarihi
+                                                        </th>
+                                                        <td>{{ \Carbon\Carbon::parse($activity->start_date)->translatedFormat('d.F.Y') }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row"><i class="fa fa-calendar-o fagns"></i> Bitiş Tarihi
+                                                        </th>
+                                                        <td>{{ $activity->end_date
+                                                            ? \Carbon\Carbon::parse($activity->end_date)->translatedFormat('d.F.Y')
+                                                            : 'Belirtilmemiş' }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row"><i class="fa fa-map-marker fagns"></i> Yer</th>
+                                                        <td>{{ $activity->location }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="icerik">
+                                                <p>{!! $activity->content !!}</p>
+                                            </div>
+                                        </div>
 
                                     </div>
                                 </div>
@@ -551,13 +636,15 @@
 
                                         <div class="innerPageNewsDetail width-103 mt-10">
                                             @foreach ($notices as $notice)
-                                            <div class="col-xs-12 col-xs-6 col-sm-6 col-lg-4">
-                                                <a href="/duyuru/{{ $notice->notice_translation()->slug }}" class="box-link box-link-orange box-border">
-                                                    <span class="block font-bold">{{ $notice->notice_translation()->title }}</span>
-                                                    {{ \Carbon\Carbon::parse($notice->created_at)->translatedFormat('d.F.Y') }}
-                                                    <span class="detail">DEVAMI</span>
-                                                </a>
-                                            </div>
+                                                <div class="col-xs-12 col-xs-6 col-sm-6 col-lg-4">
+                                                    <a href="/duyuru/{{ $notice->notice_translation()->slug }}"
+                                                        class="box-link box-link-orange box-border">
+                                                        <span
+                                                            class="block font-bold">{{ $notice->notice_translation()->title }}</span>
+                                                        {{ \Carbon\Carbon::parse($notice->created_at)->translatedFormat('d.F.Y') }}
+                                                        <span class="detail">DEVAMI</span>
+                                                    </a>
+                                                </div>
                                             @endforeach
                                         </div>
 
@@ -623,31 +710,58 @@
                                         <div id="webofisiLoad" class="innerPageNews">
                                             <ul>
                                                 @foreach ($news as $new)
-                                                <li>
-                                                    <a href="/haber/{{ $new->news_translation()->slug }}">
-                                                        <div class="photo"><img src="/storage/news/{{ $new->image }}" alt="{{ $new->news_translation()->title }}"></div>
-                                                        <div class="overlay">
-                                                            <div class="content">
-                                                                <h3><i class="icon fa fa-search-plus"></i><br>Devamını Oku...</h3>
+                                                    <li>
+                                                        <a href="/haber/{{ $new->news_translation()->slug }}">
+                                                            <div class="photo"><img src="/storage/news/{{ $new->image }}"
+                                                                    alt="{{ $new->news_translation()->title }}"></div>
+                                                            <div class="overlay">
+                                                                <div class="content">
+                                                                    <h3><i class="icon fa fa-search-plus"></i><br>Devamını Oku...
+                                                                    </h3>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <div class="comment">
+                                                            <h3 class="title">{{ $new->news_translation()->title }}</h3>
+                                                            <h3 class="text"> {!! $new->news_translation()->content !!} </h3>
+                                                            <div class="sub">
+                                                                <h2 class="date"><i class="icon fa fa-clock-o"></i>
+                                                                    <span>{{ \Carbon\Carbon::parse($new->created_at)->translatedFormat('d.F.Y') }}</span>
+                                                                </h2>
+                                                                <div class="share">
+                                                                    <a href="/haber/{{ $new->news_translation()->slug }}"><i
+                                                                            class="icon fa fa-chevron-circle-right"></i>Devamını
+                                                                        Oku</a>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </a>
-                                                    <div class="comment">
-                                                        <h3 class="title">{{ $new->news_translation()->title }}</h3>
-                                                        <h3 class="text"> {!! $new->news_translation()->content !!} </h3>
-                                                        <div class="sub">
-                                                            <h2 class="date"><i class="icon fa fa-clock-o"></i>
-                                                                <span>{{ \Carbon\Carbon::parse($new->created_at)->translatedFormat('d.F.Y') }}</span></h2>
-                                                            <div class="share">
-                                                                <a href="/haber/{{ $new->news_translation()->slug }}"><i class="icon fa fa-chevron-circle-right"></i>Devamını Oku</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
+                                                    </li>
                                                 @endforeach
                                             </ul>
-                                        </div>
 
+                                        </div>
+                                    </div>
+                                    <div class="temizle"></div>
+                                    {{-- manuel oluşturduğumuzdan böyle uzun normalde $news->link() diye çağrıldığında otomatik pagination yapacaktı. not: controller tarafında haberi çekerken ->paginate() eklenmeli. --}}
+                                    <div class="text-center">
+                                        <div class="st-pagination">
+                                            @if ($news->hasPages())
+                                                <ul class="pagination">
+                                                    <li><a href="{{ $news->previousPageUrl() }}">«</a></li>
+
+                                                    @foreach ($news->getUrlRange(1, $news->lastPage()) as $page => $url)
+                                                        @if ($page == $news->currentPage())
+                                                            <li class="active"><a
+                                                                    href="{{ $url }}">{{ $page }}</a></li>
+                                                        @else
+                                                            <li><a href="{{ $url }}">{{ $page }}</a></li>
+                                                        @endif
+                                                    @endforeach
+
+                                                    <li><a href="{{ $news->nextPageUrl() }}">»</a></li>
+                                                </ul>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -656,7 +770,7 @@
 
                     @case('mesaj')
                         <div class="innerPageHeading">
-                            <a class="active" href="/">Anasayfa</a> / {{ $message->fullname.' - '.$message->job }}
+                            <a class="active" href="/">Anasayfa</a> / {{ $message->fullname . ' - ' . $message->job }}
                             <div class="geri">
                                 <a href="javascript:history.back();"><i class="icon fa fa-angle-left"></i> Geri</a>
                             </div>
@@ -670,7 +784,7 @@
                                 <div class="col-md-9 beyaz">
                                     <div class="innerPageContent">
                                         <div class="title">
-                                            <h3>{{ $message->fullname.' - '.$message->job }}</h3>
+                                            <h3>{{ $message->fullname . ' - ' . $message->job }}</h3>
                                         </div>
 
                                         <div class="innerPageNewsDetail">
@@ -716,7 +830,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="contactMap">
-                                                        {!! $settings->google_maps !!}
+                                                    {!! $settings->google_maps !!}
                                                 </div>
                                             </div>
                                         </div>

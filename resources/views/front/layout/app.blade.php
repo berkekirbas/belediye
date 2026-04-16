@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.css') }}">
     <!-- notify CSS ============================================ -->
     <link rel="stylesheet" href="{{ asset('assets/css/pages.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/style.php') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style2.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/swiper.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/zabuto_calendar.css') }}">
     <link href="{{ asset('assets/js/fancybox/jquery.fancybox.css') }}" rel="stylesheet" type="text/css">
@@ -30,6 +30,14 @@
     <link href="{{ asset('assets/css/owl/owl.theme-2.css') }}" rel="stylesheet">
 
     <style>
+        :root {
+            --color1: {{ $theme->color1 }};
+            --color2: {{ $theme->color2 }};
+            --color3: {{ $theme->color3 }};
+            --color1-ad: {{ $theme->color1 }}ad;
+            --color1-d6: {{ $theme->color1 }}d6;
+        }
+
         #calendar {
             max-width: 900px;
             margin: 0 auto;

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Activity;
 use App\Models\ActivityTranslation;
 use App\Models\Condolence;
+use App\Models\Limit;
 use App\Models\News;
 use App\Models\NewsTranslation;
 use App\Models\Notice;
@@ -52,14 +53,15 @@ class MainController extends Controller
 
     public function page($page_type, $slug = null)
     {
-
         switch ($page_type) {
             case 'sayfa':
                 $page = Page::with('translations')->whereHas('translations', function ($query) use ($slug) {
                     $query->where('slug', $slug);
                 })->first();
 
-                if (!$page) { abort(404);}
+                if (!$page) {
+                    abort(404);
+                }
                 $quickMenu = QuickMenu::where('is_active', true)->orderBy('order')->get();
 
                 return view('front.page', compact('page', 'quickMenu', 'page_type'));
@@ -76,6 +78,7 @@ class MainController extends Controller
             case 'kategori':
 
                 $quickMenu = QuickMenu::where('is_active', true)->orderBy('order')->get();
+
                 $projectCategory = ProjectCategory::with('projects.project_translations')->where(['is_active' => true, 'slug' => $slug])->orderBy('order')->first();
 
                 return view('front.page', compact('quickMenu', 'page_type', 'projectCategory'));
@@ -148,9 +151,11 @@ class MainController extends Controller
             case 'haberler':
 
                 $quickMenu = QuickMenu::where('is_active', true)->orderBy('order')->get();
-                $news = News::with('news_translations')->where('is_active', true)->orderBy('order')->get();
+                $limit = Limit::first();
 
-                return view('front.page', compact('quickMenu', 'page_type', 'news'));
+                $news = News::with('news_translations')->where('is_active', true)->orderBy('order')->paginate($limit->news_limit);
+
+                return view('front.page', compact('quickMenu', 'page_type', 'news', 'limit'));
 
                 break;
             case 'iletisim':
@@ -179,9 +184,13 @@ class MainController extends Controller
             case 'foto':
 
                 $quickMenu = QuickMenu::where('is_active', true)->orderBy('order')->get();
-                $gallery = PhotoGalleryTranslation::with('photo_gallery.images')->where('slug', $slug)->first();
+                $limit = Limit::first();
 
-                return view('front.page', compact('quickMenu', 'page_type', 'gallery'));
+                $gallery = PhotoGalleryTranslation::with('photo_gallery')->where('slug', $slug)->first();
+
+                $images = $gallery->photo_gallery->images()->paginate($limit->photo_limit);
+
+                return view('front.page', compact('quickMenu', 'page_type', 'gallery', 'images'));
 
                 break;
             default:
