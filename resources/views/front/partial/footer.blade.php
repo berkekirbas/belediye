@@ -59,3 +59,90 @@
          <p>{{ $settings->copyright }}</p>
      </div>
  </footer>
+
+
+ <div class="modal fade" id="talep" role="dialog">
+		<div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><strong>Talep ve Öneri</h4>
+            </div>
+            <form method="post" action="system/site_islemler.php" class="comment-form">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Adınız Soyadınız</label>
+                        <input type="text" class="form-control-1" name="adsoyad">
+                    </div>
+                    <div class="col-md-4">
+                        <label>TC No</label>
+                        <input type="text" class="form-control-1" name="tc">
+                    </div>
+                    <div class="col-md-4">
+                        <label>Doğum Tarihi</label>
+                        <input type="date" class="form-control-1" name="dtarih">
+                    </div>
+                    <div class="col-md-4">
+                        <label>Hangi Yolla Cevap Almak İstersiniz?*</label>
+                        <select name="Cevap" class="form-control-1" >
+                            <option value="Yazılı">Yazılı</option>
+                            <option value="Elektronik">Elektronik</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label>E-posta adresiniz</label>
+                        <input type="email" class="form-control-1" name="email">
+                    </div>
+                    <div class="col-md-4">
+                        <label>Cinsiteyiniz</label>
+                        <select name="Cinsiyet" class="form-control-1">
+                            <option value="Bay">Bay</option>
+                            <option value="Bayan">Bayan</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Engellilik Durumunuz</label>
+                        <select name="Engellilik_Durumu" class="form-control-1">
+                            <option value="Engelli Değil">Engelli Değil</option>
+                            <option value="Engelli">Engelli</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Öğrenim Durumunuz</label>
+                        <select name="Ogrenim_Durumu" class="form-control-1">
+                            <option value="İlkokul">İlkokul</option>
+                            <option value="Orta Okul">Orta Okul</option>
+                            <option value="Lise/Teknik Lise">Lise/Teknik Lise</option>
+                            <option value="Meslek Yük. Okulu">Meslek Yük. Okulu</option>
+                            <option value="Üniversite">Üniversite</option>
+                            <option value="Yüksek Lisans">Yüksek Lisans</option>
+                            <option value="Doktora">Doktora</option>
+                            <option value="Diğer">Diğer</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Mesleginiz</label>
+                        <input type="text" class="form-control-1" name="Mesleginiz">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Oturma Yeri ve ya İş Adresi</label>
+                        <textarea class="form-control-1" rows="5" name="adres"></textarea>
+                    </div>
+                    <div class="col-md-8">
+                        <label>İstenen Bilgi ve ya Belgeler</label>
+                        <textarea class="form-control-1" rows="5" name="notu"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="url" value="/" />
+                <button name="talepbtn" class="btn btn-primary">Gönder</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>

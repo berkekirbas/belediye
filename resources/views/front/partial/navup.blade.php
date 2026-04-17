@@ -7,7 +7,7 @@
                          <a href="tel:{{ $settings->phone }}" class="call-center"><i class="fa fa-phone"
                                  aria-hidden="true"></i>
                              {{ $settings->phone }}</a>
-
+                         <a href="#" data-toggle="modal" data-target="#talep" data-backdrop="static" data-keyboard="false"> <i class="fa fa-external-link" aria-hidden="true"></i> Talep ve Öneri</a>
                          <a href="/iletisim">İletişim</a>
                      </div>
                  </div>
