@@ -14,7 +14,7 @@
                     <div class="swiper-wrapper">
                         @foreach ($duyurular as $duyuru)
                             <div class="swiper-slide news2">
-                                <a href="duyuru/#">{{ $duyuru->notice_translation()->title }}</a>
+                                <a href="duyuru/{{ $duyuru->notice_translation()->slug }}">{{ $duyuru->notice_translation()->title }}</a>
                             </div>
                         @endforeach
                     </div>

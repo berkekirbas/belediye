@@ -16,6 +16,10 @@ use App\Models\PhotoGallery;
 use App\Models\PhotoGalleryTranslation;
 use App\Models\PhotoGalleryImage;
 use App\Models\Project;
+use App\Models\Message;
+use App\Http\Requests\Admin\MessageCreateRequest;
+use App\Http\Requests\Admin\SuggestionCreateRequest;
+use App\Models\Suggestion;
 use App\Models\ProjectCategory;
 use App\Models\ProjectTranslation;
 use App\Models\QuickMenu;
@@ -45,7 +49,7 @@ class MainController extends Controller
 
         $projeler = Project::with('project_translations')->where('is_active', true)->orderBy('order')->get();
 
-        $haberler = News::with('news_translations')->where('is_active', true)->orderBy('order')->get();
+        $haberler = News::with('news_translations')->where(['is_active' => true, 'is_homepage' => true])->orderBy('order')->get();
 
 
         return view('front.main', compact('duyurular', 'etkinlik', 'galeriler', 'taziyeler', 'projeler', 'haberler'));
@@ -198,4 +202,45 @@ class MainController extends Controller
                 break;
         }
     }
+
+    public function message(MessageCreateRequest $request)
+    {
+        try {
+            Message::create([
+                'fullname' => $request->fullname,
+                'email' => $request->email,
+                'title' => $request->title,
+                'content' => $request->content
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->withErrors(['error' => 'Mesajınız gönderilirken bir hata oluştu: ' . $e->getMessage()]);
+        }
+
+        return redirect()->back()->with('success', 'Mesajınız başarıyla gönderildi');
+    }
+
+    public function suggestion(SuggestionCreateRequest $request)
+    {
+        try {
+            Suggestion::create([
+                'fullname' => $request->fullname,
+                'tc' => $request->tc,
+                'birthdate' => $request->birthdate,
+                'job' => $request->job,
+                'address' => $request->address,
+                'content' => $request->content,
+                'answer_type' => $request->answer_type,
+                'email' => $request->email,
+                'gender' => $request->gender,
+                'disability_status' => $request->disability_status,
+                'education_status' => $request->education_status
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->withErrors(['error' => 'Talebiniz gönderilirken bir hata oluştu: ' . $e->getMessage()]);
+        }
+
+        return redirect()->back()->with('success', 'Talebiniz başarıyla gönderildi');
+    }
+
+
 }

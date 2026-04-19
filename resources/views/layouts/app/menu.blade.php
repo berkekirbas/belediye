@@ -56,12 +56,6 @@
                 </ul>
             </li>
 
-            <li class="sidebar-item ">
-                <a class="sidebar-link" href="{{ route('suggestion') }}">
-                    <i class="align-middle" data-feather="book-open"></i> <span class="align-middle">Talep & Öneri
-                        Formu</span>
-                </a>
-            </li>
             <li class="sidebar-item">
                 <a class="sidebar-link collapsed d-flex align-items-center justify-content-between" href="#projectMenu"
                     data-bs-toggle="collapse" aria-expanded="false">
@@ -109,9 +103,10 @@
                     <i class="align-middle" data-feather="mail"></i> <span class="align-middle">Mesajlar</span>
                 </a>
             </li>
-            <li class="sidebar-item ">
-                <a class="sidebar-link" href="{{ route('newsletter') }}">
-                    <i class="align-middle" data-feather="at-sign"></i> <span class="align-middle">E-Bülten</span>
+             <li class="sidebar-item ">
+                <a class="sidebar-link" href="{{ route('suggestion') }}">
+                    <i class="align-middle" data-feather="book-open"></i> <span class="align-middle">Talep & Öneri
+                        Formu</span>
                 </a>
             </li>
 

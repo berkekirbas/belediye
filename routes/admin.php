@@ -20,6 +20,8 @@ use App\Http\Controllers\Admin\Staff\StaffController;
 use App\Http\Controllers\Admin\ProjectCategory\ProjectCategoryController;
 use App\Http\Controllers\Admin\Project\ProjectController;
 use App\Http\Controllers\Admin\News\NewsController;
+use App\Http\Controllers\Admin\Message\MessageController;
+use App\Http\Controllers\Admin\Suggestion\SuggestionController;
 use App\Http\Controllers\Admin\PhotoGallery\PhotoGalleryController;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -174,9 +176,7 @@ Route::prefix('/panel')->middleware('auth')->group(function () {
     Route::get('/contact', function () {
         return view('panel.contact.index');
     })->name('contact');
-    Route::get('/suggestion', function () {
-        return view('panel.suggestion.index');
-    })->name('suggestion');
+
     // Proje Kategorisi Yönetim Modülünün yönlendirmeleri
     Route::prefix('/project-category')->group(function () {
         Route::get('/', [ProjectCategoryController::class, 'index'])->name('project-category');
@@ -217,12 +217,26 @@ Route::prefix('/panel')->middleware('auth')->group(function () {
         Route::delete('/destroy/{id}', [PhotoGalleryController::class, 'destroy'])->name('photo.destroy');
         Route::delete('/image/{id}', [PhotoGalleryController::class, 'destroyImage'])->name('photo.image.destroy');
     });
+    // Mesaj Yönetim Modülünün yönlendirmeleri
+    Route::prefix('/message')->group(function () {
+        Route::get('/', [MessageController::class, 'index'])->name('message');
+        Route::get('/message/{id}', [MessageController::class, 'show'])->name('message.show');
+        Route::post('/read/{id}', [MessageController::class, 'read'])->name('message.read');
+        Route::delete('/destroy/{id}', [MessageController::class, 'destroy'])->name('message.destroy');
+    });
+    // Talep & Öneri Yönetim Modülünün yönlendirmeleri
+    Route::prefix('/suggestion')->group(function () {
+        Route::get('/', [SuggestionController::class, 'index'])->name('suggestion');
+        Route::get('/suggestion/{id}', [SuggestionController::class, 'show'])->name('suggestion.show');
+        Route::post('/read/{id}', [SuggestionController::class, 'read'])->name('suggestion.read');
+        Route::delete('/destroy/{id}', [SuggestionController::class, 'destroy'])->name('suggestion.destroy');
+    });
+
+
     Route::get('/language', function () {
         return view('panel.language.index');
     })->name('language');
-    Route::get('/message', function () {
-        return view('panel.message.index');
-    })->name('message');
+
     Route::get('/newsletter', function () {
         return view('panel.newsletter.index');
     })->name('newsletter');

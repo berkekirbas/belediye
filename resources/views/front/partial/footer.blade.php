@@ -68,12 +68,13 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title"><strong>Talep ve Öneri</h4>
             </div>
-            <form method="post" action="system/site_islemler.php" class="comment-form">
+            <form method="post" action="{{ route('front.suggestion') }}" class="comment-form" id="suggestion_form">
+                @csrf
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-4">
                         <label>Adınız Soyadınız</label>
-                        <input type="text" class="form-control-1" name="adsoyad">
+                        <input type="text" class="form-control-1" name="fullname">
                     </div>
                     <div class="col-md-4">
                         <label>TC No</label>
@@ -81,11 +82,11 @@
                     </div>
                     <div class="col-md-4">
                         <label>Doğum Tarihi</label>
-                        <input type="date" class="form-control-1" name="dtarih">
+                        <input type="date" class="form-control-1" name="birthdate">
                     </div>
                     <div class="col-md-4">
                         <label>Hangi Yolla Cevap Almak İstersiniz?*</label>
-                        <select name="Cevap" class="form-control-1" >
+                        <select name="answer_type" class="form-control-1" >
                             <option value="Yazılı">Yazılı</option>
                             <option value="Elektronik">Elektronik</option>
                         </select>
@@ -96,21 +97,21 @@
                     </div>
                     <div class="col-md-4">
                         <label>Cinsiteyiniz</label>
-                        <select name="Cinsiyet" class="form-control-1">
-                            <option value="Bay">Bay</option>
-                            <option value="Bayan">Bayan</option>
+                        <select name="gender" class="form-control-1">
+                            <option value="Kadın">Kadın</option>
+                            <option value="Erkek">Erkek</option>
                         </select>
                     </div>
                     <div class="col-md-4">
                         <label>Engellilik Durumunuz</label>
-                        <select name="Engellilik_Durumu" class="form-control-1">
-                            <option value="Engelli Değil">Engelli Değil</option>
-                            <option value="Engelli">Engelli</option>
+                        <select name="disability_status" class="form-control-1">
+                            <option value="0">Engelli Değil</option>
+                            <option value="1">Engelli</option>
                         </select>
                     </div>
                     <div class="col-md-4">
                         <label>Öğrenim Durumunuz</label>
-                        <select name="Ogrenim_Durumu" class="form-control-1">
+                        <select name="education_status" class="form-control-1">
                             <option value="İlkokul">İlkokul</option>
                             <option value="Orta Okul">Orta Okul</option>
                             <option value="Lise/Teknik Lise">Lise/Teknik Lise</option>
@@ -123,26 +124,55 @@
                     </div>
                     <div class="col-md-4">
                         <label>Mesleginiz</label>
-                        <input type="text" class="form-control-1" name="Mesleginiz">
+                        <input type="text" class="form-control-1" name="job">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <label>Oturma Yeri ve ya İş Adresi</label>
-                        <textarea class="form-control-1" rows="5" name="adres"></textarea>
+                        <textarea class="form-control-1" rows="5" name="address"></textarea>
                     </div>
                     <div class="col-md-8">
                         <label>İstenen Bilgi ve ya Belgeler</label>
-                        <textarea class="form-control-1" rows="5" name="notu"></textarea>
+                        <textarea class="form-control-1" rows="5" name="content"></textarea>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <input type="hidden" name="url" value="/" />
-                <button name="talepbtn" class="btn btn-primary">Gönder</button>
+                <button id="suggestion_save" class="btn btn-primary">Gönder</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
             </div>
             </form>
         </div>
     </div>
 </div>
+<script>
+    $('#suggestion_save').click(function(e) {
+        e.preventDefault(); // Formun normal şekilde submit edilmesini engelle
+
+        var formData = $('#suggestion_form').serialize(); // Form verilerini serialize et
+
+        $.ajax({
+            url: $('#suggestion_form').attr('action'), // Formun action URL'si
+            type: 'POST', // Formun method'u
+            data: formData, // Serialize edilmiş form verileri
+            success: function(response) {
+                alert('Talebiniz başarıyla gönderildi!'); // Başarılı mesaj
+                $('#suggestion_form')[0].reset(); // Formu sıfırla
+            },
+            error: function(xhr) {
+
+                if (xhr.status === 422) {
+                let errors = xhr.responseJSON.errors;
+                let message = '';
+                $.each(errors, function (key, value) {
+                    message += value[0] + "\n";
+                });
+                alert(message);
+                } else {
+                    alert('Talep gönderilirken bir hata oluştu. Lütfen tekrar deneyin.');
+                }
+            }
+        });
+    });
+</script>

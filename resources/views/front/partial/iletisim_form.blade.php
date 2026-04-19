@@ -7,39 +7,28 @@
                 <h4>Fikirlerinizi Bizimle Paylaşın</h4>
                 <h4>Önerilerinizi Buraya Yazın Gönder Butonuna Basın</h4>
 
-                <form id="iletisim" action="system/site_islemler.php" method="post">
+                <form id="iletisim" action="{{ route('front.message') }}" method="post">
                     <div class="row oneri-form">
-
+                        @csrf
                         <div class="col-md-6">
-                            <input class="form-control" placeholder="Adınız Soyadınız" type="text" name="isim"
-                                required>
+                            <input class="form-control" placeholder="Adınız Soyadınız" type="text" name="fullname">
                         </div>
-
                         <div class="col-md-6">
-                            <input class="form-control" placeholder="E-posta adresiniz" type="email" name="email"
-                                required>
+                            <input class="form-control" placeholder="E-posta adresiniz" type="email" name="email">
                         </div>
-
                         <div class="col-md-12 form-mt">
-                            <input type="text" class="form-control" placeholder="Mesajın Konusu" name="konu">
+                            <input type="text" class="form-control" placeholder="Mesajın Konusu" name="title">
                         </div>
-
                         <div class="col-md-12 form-mt">
-                            <textarea class="form-control" placeholder="Mesajınız" name="mesaj" rows="3" required></textarea>
+                            <textarea class="form-control" placeholder="Mesajınız" name="content" rows="3"></textarea>
                         </div>
-
                         <!-- CAPTCHA -->
                         <div class="col-md-6 form-mt">
                             <label>8 + 5 = ?</label>
-                            <input class="form-control" type="text" name="captcha" required>
+                            <input class="form-control" type="text" name="captcha">
                         </div>
-
-                        <input type="hidden" id="url" name="url" value="/">
-
                         <div class="col-md-12 t-center mt-30">
-                            <button style="width: 185px;margin-top: 0px;" type="submit" name="IletisimBtn"
-                                class="footersubmit">
-                                Gönder </button>
+                            <button id="contact_save" style="width: 185px;margin-top: 0px;" type="button" name="IletisimBtn"  class="footersubmit">  Gönder</button>
                         </div>
 
                     </div>
@@ -69,3 +58,33 @@
         </div>
     </div>
 </div>
+<script>
+    $('#contact_save').click(function(e) {
+        e.preventDefault(); // Formun normal şekilde submit edilmesini engelle
+
+        var formData = $('#iletisim').serialize(); // Form verilerini serialize et
+
+        $.ajax({
+            url: $('#iletisim').attr('action'), // Formun action URL'si
+            type: 'POST', // Formun method'u
+            data: formData, // Serialize edilmiş form verileri
+            success: function(response) {
+                alert('Mesajınız başarıyla gönderildi!'); // Başarılı mesaj
+                $('#iletisim')[0].reset(); // Formu sıfırla
+            },
+            error: function(xhr) {
+
+                if (xhr.status === 422) {
+                let errors = xhr.responseJSON.errors;
+                let message = '';
+                $.each(errors, function (key, value) {
+                    message += value[0] + "\n";
+                });
+                alert(message);
+                } else {
+                    alert('Mesaj gönderilirken bir hata oluştu. Lütfen tekrar deneyin.');
+                }
+            }
+        });
+    });
+</script>

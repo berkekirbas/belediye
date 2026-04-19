@@ -66,9 +66,6 @@
                 `;
 
 
-
-                console.log(icerik);
-
                     return {
                         date: translation.start_date,
                         badge: true,
