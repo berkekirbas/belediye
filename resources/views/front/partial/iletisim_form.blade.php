@@ -10,8 +10,9 @@
                 <form id="iletisim" action="{{ route('front.message') }}" method="post">
                     <div class="row oneri-form">
                         @csrf
+                        <input type="hidden" name="recaptcha" id="recaptcha_contact" readonly>
                         <div class="col-md-6">
-                            <input class="form-control" placeholder="Adınız Soyadınız" type="text" name="fullname">
+                            <input id="iletisim_fullname" class="form-control" placeholder="Adınız Soyadınız" type="text" name="fullname">
                         </div>
                         <div class="col-md-6">
                             <input class="form-control" placeholder="E-posta adresiniz" type="email" name="email">
@@ -22,11 +23,7 @@
                         <div class="col-md-12 form-mt">
                             <textarea class="form-control" placeholder="Mesajınız" name="content" rows="3"></textarea>
                         </div>
-                        <!-- CAPTCHA -->
-                        <div class="col-md-6 form-mt">
-                            <label>8 + 5 = ?</label>
-                            <input class="form-control" type="text" name="captcha">
-                        </div>
+
                         <div class="col-md-12 t-center mt-30">
                             <button id="contact_save" style="width: 185px;margin-top: 0px;" type="button" name="IletisimBtn"  class="footersubmit">  Gönder</button>
                         </div>
@@ -59,6 +56,18 @@
     </div>
 </div>
 <script>
+    $('#iletisim_fullname').on('click', function() {
+         @if ($settings->recaptcha_project_id && $settings->recaptcha_key)
+             grecaptcha.ready(function() {
+                 grecaptcha.execute('{{ $settings->recaptcha_key }}', {
+                     action: 'contact_form'
+                 }).then(function(token) {
+                     $('#recaptcha_contact').val(token);
+                 });
+             });
+         @endif
+     });
+
     $('#contact_save').click(function(e) {
         e.preventDefault(); // Formun normal şekilde submit edilmesini engelle
 

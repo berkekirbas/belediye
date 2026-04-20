@@ -208,6 +208,34 @@ class MainController extends Controller
 
     public function message(MessageCreateRequest $request)
     {
+
+        $settings = Settings::first();
+
+        $url = "https://recaptchaenterprise.googleapis.com/v1/projects/{$settings->recaptcha_project_id}/assessments?key={$settings->recaptcha_api_key}";
+
+        $response = Http::acceptJson()->post($url, [
+            'event' => [
+                'token' => $request->recaptcha_contact,
+                'siteKey' => $settings->recaptcha_key,
+                'expectedAction' => 'contact_form',
+                'userAgent' => request()->userAgent(),
+                'userIpAddress' => request()->ip(),
+            ],
+        ]);
+
+        $result = $response->json();
+
+        $valid = data_get($result, 'tokenProperties.valid', false);
+        $score = (float) data_get($result, 'riskAnalysis.score', 0);
+        $action = data_get($result, 'tokenProperties.action');
+
+
+        if (! $valid || $action !== 'suggestion' || $score < 0.5) {
+            throw ValidationException::withMessages([
+                'recaptcha' => 'reCAPTCHA doğrulaması başarısız oldu. Lütfen tekrar deneyin.',
+            ]);
+        }
+
         try {
             Message::create([
                 'fullname' => $request->fullname,
