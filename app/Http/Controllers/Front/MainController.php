@@ -243,8 +243,6 @@ class MainController extends Controller
         $valid = data_get($result, 'tokenProperties.valid', false);
         $score = (float) data_get($result, 'riskAnalysis.score', 0);
         $action = data_get($result, 'tokenProperties.action');
-        $invalidReason = data_get($result, 'tokenProperties.invalidReason');
-        $hostname = data_get($result, 'tokenProperties.hostname');
 
 
         if (! $valid || $action !== 'suggestion' || $score < 0.5) {
