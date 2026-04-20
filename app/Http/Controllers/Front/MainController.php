@@ -215,7 +215,7 @@ class MainController extends Controller
 
         $response = Http::acceptJson()->post($url, [
             'event' => [
-                'token' => $request->recaptcha_contact,
+                'token' => $request->recaptcha,
                 'siteKey' => $settings->recaptcha_key,
                 'expectedAction' => 'contact_form',
                 'userAgent' => request()->userAgent(),
