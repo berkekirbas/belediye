@@ -229,8 +229,7 @@ class MainController extends Controller
         $score = (float) data_get($result, 'riskAnalysis.score', 0);
         $action = data_get($result, 'tokenProperties.action');
 
-
-        if (! $valid || $action !== 'suggestion' || $score < 0.5) {
+        if (! $valid || $action !== 'contact_form' || $score < 0.5) {
             throw ValidationException::withMessages([
                 'recaptcha' => 'reCAPTCHA doğrulaması başarısız oldu. Lütfen tekrar deneyin.',
             ]);
