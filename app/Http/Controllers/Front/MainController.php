@@ -25,6 +25,9 @@ use App\Models\ProjectTranslation;
 use App\Models\QuickMenu;
 use App\Models\StaffGroup;
 use Carbon\Carbon;
+use App\Models\Settings;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -221,6 +224,35 @@ class MainController extends Controller
 
     public function suggestion(SuggestionCreateRequest $request)
     {
+        $settings = Settings::first();
+
+        $url = "https://recaptchaenterprise.googleapis.com/v1/projects/{$settings->recaptcha_project_id}/assessments?key={$settings->recaptcha_api_key}";
+
+        $response = Http::acceptJson()->post($url, [
+            'event' => [
+                'token' => $request->recaptcha,
+                'siteKey' => $settings->recaptcha_key,
+                'expectedAction' => 'suggestion',
+                'userAgent' => request()->userAgent(),
+                'userIpAddress' => request()->ip(),
+            ],
+        ]);
+
+        $result = $response->json();
+
+        $valid = data_get($result, 'tokenProperties.valid', false);
+        $score = (float) data_get($result, 'riskAnalysis.score', 0);
+        $action = data_get($result, 'tokenProperties.action');
+        $invalidReason = data_get($result, 'tokenProperties.invalidReason');
+        $hostname = data_get($result, 'tokenProperties.hostname');
+
+
+        if (! $valid || $action !== 'suggestion' || $score < 0.5) {
+            throw ValidationException::withMessages([
+                'recaptcha' => 'reCAPTCHA doğrulaması başarısız oldu. Lütfen tekrar deneyin.',
+            ]);
+        }
+
         try {
             Suggestion::create([
                 'fullname' => $request->fullname,
@@ -241,6 +273,4 @@ class MainController extends Controller
 
         return redirect()->back()->with('success', 'Talebiniz başarıyla gönderildi');
     }
-
-
 }

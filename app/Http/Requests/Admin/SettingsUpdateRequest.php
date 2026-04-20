@@ -32,7 +32,10 @@ class SettingsUpdateRequest extends FormRequest
             'linkedin_url' => ['nullable', 'url'],
             'copyright' => ['nullable', 'string'],
             'privacy_policy' => ['nullable', 'string'],
-            'kvkk' => ['nullable', 'string']
+            'kvkk' => ['nullable', 'string'],
+            'recaptcha_key' => ['nullable', 'string'],
+            'recaptcha_project_id' => ['nullable', 'string'],
+            "recaptcha_api_key" => ['nullable', 'string'],
         ];
     }
 
@@ -72,7 +75,9 @@ class SettingsUpdateRequest extends FormRequest
             'linkedin_url.url' => 'Geçerli bir LinkedIn URL\'si giriniz.',
             'copyright.string' => 'Copyright metni bir metin olmalıdır.',
             'privacy_policy.string' => 'Gizlilik politikası metni bir metin olmalıdır.',
-            'kvkk.string' => 'KVKK metni bir metin olmalıdır.'
+            'kvkk.string' => 'KVKK metni bir metin olmalıdır.',
+            'recaptcha_key.string' => 'reCAPTCHA anahtarı bir metin olmalıdır.',
+            'recaptcha_project_id.string' => 'reCAPTCHA proje ID\'si bir metin olmalıdır.',
         ];
     }
 }

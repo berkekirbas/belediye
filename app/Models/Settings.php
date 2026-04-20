@@ -37,6 +37,9 @@ class Settings extends Model
         'kvkk',
         'suggestion_status',
         'site_status',
+        'recaptcha_key',
+        'recaptcha_project_id',
+        'recaptcha_api_key'
 
     ];
 
@@ -74,5 +77,4 @@ class Settings extends Model
             ? asset('storage/settings/' . $this->baskan_photo)
             : null;
     }
-
 }

@@ -106,10 +106,11 @@ class SettingsController extends Controller
                 'kvkk' => $request->kvkk,
                 'baskan_fullname' => $request->baskan_fullname,
                 'suggestion_status' => $request->has('suggestion_status') ? 1 : 0,
-                'site_status' => $request->has('site_status') ? 1 : 0
+                'site_status' => $request->has('site_status') ? 1 : 0,
+                'recaptcha_key' => $request->recaptcha_key,
+                'recaptcha_project_id' => $request->recaptcha_project_id,
+                'recaptcha_api_key' => $request->recaptcha_api_key
             ]);
-
-
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->withErrors(['error' => 'Ayarlar güncellenirken bir hata oluştu: ' . $e->getMessage()]);
         }

@@ -29,6 +29,10 @@
     <link href="{{ asset('assets/css/owl/owl.carousel-2.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/owl/owl.theme-2.css') }}" rel="stylesheet">
 
+    @if ($settings->recaptcha_project_id && $settings->recaptcha_key)
+        <script src="https://www.google.com/recaptcha/api.js?render={{ $settings->recaptcha_key }}"></script>
+    @endif
+
     <style>
         :root {
             --color1: {{ $theme->color1 }};
