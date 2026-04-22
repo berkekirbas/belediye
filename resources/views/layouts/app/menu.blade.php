@@ -97,7 +97,11 @@
                     <i class="align-middle" data-feather="camera"></i> <span class="align-middle">Foto Galeri</span>
                 </a>
             </li>
-
+            <li class="sidebar-item ">
+                <a class="sidebar-link" href="{{ route('decision') }}">
+                    <i class="align-middle" data-feather="file-text"></i> <span class="align-middle">Meclis Kararları</span>
+                </a>
+            </li>
             <li class="sidebar-item ">
                 <a class="sidebar-link" href="{{ route('message') }}">
                     <i class="align-middle" data-feather="mail"></i> <span class="align-middle">Mesajlar</span>

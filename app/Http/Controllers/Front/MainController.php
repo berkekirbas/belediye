@@ -16,6 +16,7 @@ use App\Models\PhotoGallery;
 use App\Models\PhotoGalleryTranslation;
 use App\Models\PhotoGalleryImage;
 use App\Models\Project;
+use App\Models\Decision;
 use App\Models\Message;
 use App\Http\Requests\Admin\MessageCreateRequest;
 use App\Http\Requests\Admin\SuggestionCreateRequest;
@@ -105,6 +106,18 @@ class MainController extends Controller
                 $new = NewsTranslation::with('news.images')->where('slug', $slug)->first();
 
                 return view('front.page', compact('quickMenu', 'page_type', 'new'));
+
+                break;
+            case 'meclis-kararlari':
+
+                $quickMenu = QuickMenu::where('is_active', true)->orderBy('order')->get();
+                $decisions = Decision::where('is_active', true)
+                                     ->where('year', now()->year)
+                                     ->orderBy('month')
+                                     ->get();
+                $years= Decision::where('is_active', true)->pluck('year')->unique();
+
+                return view('front.page', compact('quickMenu', 'page_type', 'decisions', 'years'));
 
                 break;
             case 'foto-galeri':
@@ -298,4 +311,23 @@ class MainController extends Controller
 
         return redirect()->back()->with('success', 'Talebiniz başarıyla gönderildi');
     }
+
+
+    public function getDecisionsByYear($year)
+    {
+
+        $decisions = Decision::where('is_active', true)
+                             ->where('year', $year)
+                             ->orderBy('month')
+                             ->get();
+
+        if (request()->ajax()) {
+            return view('front.partial.meclis_kararlari', compact('decisions'))->render();
+        }
+
+    return redirect()->back(); // normal giriş engelle
+    }
+
+
+
 }

@@ -84,9 +84,20 @@
     <script src="{{ asset('assets/js/notifyjs/dist/notify.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/notifications/notify-metro.js') }}" type="text/javascript"></script>
 
-
-
-
 </body>
-
 </html>
+<script>
+    $(document).ready(function() {
+
+        $('#decisionYear').change(function() {
+            var selectedYear = $(this).val();
+           $.ajax({
+                url: '/ajax/meclis-kararlari/' + selectedYear,
+                type: 'GET',
+                success: function(response) {
+                    $('#decisionDiv').html(response);
+                }
+            });
+        });
+    });
+</script>

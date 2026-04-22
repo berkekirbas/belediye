@@ -51,6 +51,7 @@
                             @endforeach
                         </optgroup>
                         <optgroup label="Sabit Sayfalar">
+                            <option value="/meclis-kararlari">Meclis Kararları</option>
                             <option value="/foto-galeri">Foto Galeri</option>
                             <option value="/video-galeri">Video Galeri</option>
                             <option value="/etkinlikler">Etkinlikler</option>

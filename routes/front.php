@@ -8,3 +8,5 @@ Route::get('/{page_type}/{slug?}', [MainController::class, 'page'])->name('front
 
 Route::post('/message', [MainController::class, 'message'])->name('front.message');
 Route::post('/suggestion', [MainController::class, 'suggestion'])->name('front.suggestion');
+
+Route::get('/ajax/meclis-kararlari/{year}', [MainController::class, 'getDecisionsByYear']);

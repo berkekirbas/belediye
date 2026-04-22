@@ -69,18 +69,20 @@
                         </optgroup>
                         <optgroup label="Foto Galeri">
                             @foreach ($photo_gallery as $gallery)
-                                <option value="/foto/{{ $gallery->photo_gallery_translation()->slug }}">
+                                <option value="/foto/{{ $gallery->photo_gallery_translation()->slug }}"
+                                    {{ $menu->url === '/foto/' . $gallery->photo_gallery_translation()->slug ? ' selected' : '' }}>
                                     {{ $gallery->photo_gallery_translation()->title }}</option>
                             @endforeach
                         </optgroup>
 
                         <optgroup label="Sabit Sayfalar">
-                            <option value="/foto-galeri">Foto Galeri</option>
-                            <option value="/video-galeri">Video Galeri</option>
-                            <option value="/etkinlikler">Etkinlikler</option>
-                            <option value="/duyurular">Duyurular</option>
-                            <option value="/haberler">Haberler</option>
-                            <option value="/iletisim">İletişim</option>
+                            <option value="/meclis-kararlari" {{ $menu->url === '/meclis-kararlari' ? ' selected' : '' }}>Meclis Kararları</option>
+                            <option value="/foto-galeri" {{ $menu->url === '/foto-galeri' ? ' selected' : '' }}>Foto Galeri</option>
+                            <option value="/video-galeri" {{ $menu->url === '/video-galeri' ? ' selected' : '' }}>Video Galeri</option>
+                            <option value="/etkinlikler" {{ $menu->url === '/etkinlikler' ? ' selected' : '' }}>Etkinlikler</option>
+                            <option value="/duyurular" {{ $menu->url === '/duyurular' ? ' selected' : '' }}>Duyurular</option>
+                            <option value="/haberler" {{ $menu->url === '/haberler' ? ' selected' : '' }}>Haberler</option>
+                            <option value="/iletisim" {{ $menu->url === '/iletisim' ? ' selected' : '' }}>İletişim</option>
                         </optgroup>
                     </select>
                 </div>

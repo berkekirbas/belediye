@@ -40,6 +40,66 @@
                         </div>
                     @break
 
+                    @case('meclis-kararlari')
+                        <div class="innerPageHeading">
+                            <a class="active" href="/">Anasayfa</a> / Meclis Kararları
+                            <div class="geri">
+                                <a href="javascript:history.back();"><i class="icon fa fa-angle-left"></i> Geri</a>
+                            </div>
+                        </div>
+                        <div class="col-md-12 menu-bg">
+                            <div class="row">
+                                <div class="leftNavOpen">
+                                    <a href="javascript:void();"><i class="icon fa fa-bars"></i>HIZLI MENU</a>
+                                </div>
+                                @include('front.partial.quick_menu')
+                                <div class="col-md-9 beyaz">
+                                    <div class="innerPageContent">
+                                        <div class="geri">
+                                            <select name="year" id="decisionYear">
+                                                @foreach ($years as $year)
+                                                    <option value="{{ $year }}">{{ $year }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="title">
+                                            <h3>Meclis Kararları</h3>
+                                        </div>
+
+                                        <div id="decisionDiv" class="innerPageNews innerPageProjects">
+                                             <ul>
+                                                @foreach ($decisions as $decision)
+                                                <li>
+                                                    <a href="{{ $decision->file_url }}" target="_blank">
+                                                        <div class="photo">
+                                                            <img style="width: 100%; height: auto;" src="{{ asset('assets/tema/PDF_LOGO.png') }}">
+                                                        </div>
+                                                        <div class="overlay">
+                                                            <div class="content">
+                                                                <h3><i class="icon fa fa-search-plus"></i><br>Görüntüle..</h3>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <div class="comment">
+                                                        <h3 style="height:50px!important;" class="text">{{ $decision->title }}</h3>
+                                                        <div class="sub">
+                                                            <h2 class="date"><i class="icon fa fa-clock-o"></i>
+                                                                <span>{{ \Carbon\Carbon::create()->month($decision->month)->translatedFormat('F').' - '.$decision->year }}</span></h2>
+                                                            <div class="share">
+                                                                <a href="{{ $decision->file_url }}" target="_blank"><i class="icon fa fa-chevron-circle-right"></i> Görüntüle</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @break
+
                     @case('kurumsal-yapi')
                         <div class="innerPageHeading">
                             <a class="active" href="/">Anasayfa</a> / {{ $staffGroup->name }}
@@ -847,3 +907,5 @@
         </div>
     </div>
 @endsection
+
+

@@ -23,7 +23,7 @@ use App\Http\Controllers\Admin\News\NewsController;
 use App\Http\Controllers\Admin\Message\MessageController;
 use App\Http\Controllers\Admin\Suggestion\SuggestionController;
 use App\Http\Controllers\Admin\PhotoGallery\PhotoGalleryController;
-
+use App\Http\Controllers\Admin\Decision\DecisionController;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Support\Facades\Route;
 
@@ -232,6 +232,16 @@ Route::prefix('/panel')->middleware('auth')->group(function () {
         Route::delete('/destroy/{id}', [SuggestionController::class, 'destroy'])->name('suggestion.destroy');
     });
 
+    // Meclis Kararları Yönetim Modülünün yönlendirmeleri
+    Route::prefix('/decision')->group(function () {
+        Route::get('/', [DecisionController::class, 'index'])->name('decision');
+        Route::get('/add', [DecisionController::class, 'add'])->name('decision.add');
+        Route::post('/add', [DecisionController::class, 'store'])->name('decision.store');
+        Route::get('/edit/{id}', [DecisionController::class, 'edit'])->name('decision.edit');
+        Route::post('/edit/{id}', [DecisionController::class, 'update'])->name('decision.update');
+        Route::delete('/destroy/{id}', [DecisionController::class, 'destroy'])->name('decision.destroy');
+    });
+
 
     Route::get('/language', function () {
         return view('panel.language.index');
@@ -240,4 +250,5 @@ Route::prefix('/panel')->middleware('auth')->group(function () {
     Route::get('/newsletter', function () {
         return view('panel.newsletter.index');
     })->name('newsletter');
+
 });
