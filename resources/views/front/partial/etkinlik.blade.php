@@ -123,7 +123,7 @@
 
                         </div>
 
-                        <div class="tabAreaBtn"><a href="foto-galeri.html">TÜMÜNÜ GÖSTER</a></div>
+                        <div class="tabAreaBtn"><a href="/foto-galeri">TÜMÜNÜ GÖSTER</a></div>
 
                         <style>
                             #owl .item {
@@ -163,7 +163,7 @@
                                     smartSpeed: 1000,
                                     autoplay: true,
                                     autoplayTimeout: 4000,
-                                    loop: false,
+                                    loop: true,
                                     autoplayHoverPause: true,
                                     nav: true
 

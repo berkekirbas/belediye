@@ -31,11 +31,11 @@
                                  <strong class='active'> <img
                                          src="/assets/tema/belediye/uploads/diller/kucuk/if_Turkey_298423.png"
                                          style="max-width: 23px;margin-top: -5px;">
-                                     Türkçe </strong> </a><span style="font-size:20px;"> | </span>
-                             <a href="javascript:;" class="dildegis" data-id="24">
-                                 English </a>
+                                     Türkçe </strong> </a><span style="font-size:20px;">  </span>
+                             {{--<a href="javascript:;" class="dildegis" data-id="24">
+                                 English </a>--}}
                          </span>
-                         {{-- <form method="get" action="ara.html" class="form-search form-search-position">
+                          {{--<form method="get" action="ara.html" class="form-search form-search-position">
                              <div class="form-content">
                                  <input type="text" class="form-control" name="kelime" required
                                      placeholder="Site içi arama..">

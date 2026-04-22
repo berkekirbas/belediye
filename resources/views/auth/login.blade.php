@@ -29,7 +29,7 @@
                                         @endif
 
                                     @csrf
-
+                                    <input type="hidden" name="recaptcha" id="recaptcha_login" readonly>
                                     <div class="mb-3">
                                         <label class="form-label">Kullanıcı Adı</label>
                                         <input class="form-control form-control-lg email" type="text" name="username"
@@ -61,3 +61,5 @@
         </div>
     </div>
 @endsection
+
+

@@ -21,7 +21,7 @@
                                 <div class="swiper-slide radius-5">
                                     <a href="/haber/{{ $haber->news_translation()->slug }}"><img
                                             class="img-fluid radius-5" src="/storage/news/{{ $haber->image }}"
-                                            alt="Dünya Otizm Farkındalık Günü">
+                                            alt="{{ $haber->news_translation()->title }}">
                                         <div class="slide-desc">
                                             <p class="slide-in">{{ $haber->news_translation()->title }}</p>
                                         </div>

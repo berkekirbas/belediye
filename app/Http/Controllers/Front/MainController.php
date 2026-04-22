@@ -52,7 +52,7 @@ class MainController extends Controller
 
         $projeler = Project::with('project_translations')->where('is_active', true)->orderBy('order')->get();
 
-        $haberler = News::with('news_translations')->where(['is_active' => true, 'is_homepage' => true])->orderBy('order')->get();
+        $haberler = News::with('news_translations')->where(['is_active' => true, 'is_homepage' => true])->orderBy('order')->take(25)->get();
 
 
         return view('front.main', compact('duyurular', 'etkinlik', 'galeriler', 'taziyeler', 'projeler', 'haberler'));
