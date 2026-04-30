@@ -247,13 +247,15 @@ class MainController extends Controller
                 'recaptcha' => 'reCAPTCHA doğrulaması başarısız oldu. Lütfen tekrar deneyin.',
             ]);
         }
-
+        $content = strip_tags($request->content);
+        $fullname = strip_tags($request->fullname);
+        $title = strip_tags($request->title);
         try {
             Message::create([
-                'fullname' => $request->fullname,
+                'fullname' => $fullname,
                 'email' => $request->email,
-                'title' => $request->title,
-                'content' => $request->content
+                'title' => $title,
+                'content' => $content
             ]);
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->withErrors(['error' => 'Mesajınız gönderilirken bir hata oluştu: ' . $e->getMessage()]);
@@ -291,16 +293,23 @@ class MainController extends Controller
             ]);
         }
 
+        $content = strip_tags($request->content);
+        $fullname = strip_tags($request->fullname);
+        $tc = strip_tags($request->tc);
+        $address = strip_tags($request->address);
+        $job = strip_tags($request->job);
+        $email = strip_tags($request->email);
+
         try {
             Suggestion::create([
-                'fullname' => $request->fullname,
-                'tc' => $request->tc,
+                'fullname' => $fullname,
+                'tc' => $tc,
                 'birthdate' => $request->birthdate,
-                'job' => $request->job,
-                'address' => $request->address,
-                'content' => $request->content,
+                'job' => $job,
+                'address' => $address,
+                'content' => $content,
                 'answer_type' => $request->answer_type,
-                'email' => $request->email,
+                'email' => $email,
                 'gender' => $request->gender,
                 'disability_status' => $request->disability_status,
                 'education_status' => $request->education_status
